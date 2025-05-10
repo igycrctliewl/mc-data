@@ -14,5 +14,5 @@ public interface VillageService {
 	public VillageDto findOrCreateVillage( String name );
 	public VillageDto createNewVillage( VillageDto village );
 	public List<VillageDto> retrieveAllVillages();
-	public Boolean removeVillage( VillageDto village );
+	public boolean removeVillage( VillageDto village );
 }

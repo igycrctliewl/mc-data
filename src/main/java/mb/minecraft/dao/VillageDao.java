@@ -14,5 +14,5 @@ public interface VillageDao extends DisposableBean {
 	public List<Village> selectAll();
 	public Village insertOne( Village village );
 	public Long getNextIdSeq();
-	public Boolean deleteOne( Village village );
+	public boolean deleteOne( Village village );
 }

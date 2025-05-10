@@ -71,13 +71,4 @@ public class Village implements Serializable {
 		}
 	}
 
-
-
-	public static void main( String[] args ) {
-		Village v = Village.builder()
-				  .id( 987L )
-				  .name( "Heart" )
-				  .build();
-		System.out.println( v );
-	}
 }

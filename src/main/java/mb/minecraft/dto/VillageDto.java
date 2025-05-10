@@ -22,7 +22,7 @@ public class VillageDto {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() != null ? this.getId().toString() : "null" ).append( COMMA_SEPARATOR );
 		sb.append( "name=" ).append( this.getName() ).append( " )");
 		return sb.toString();
 	}
@@ -67,12 +67,4 @@ public class VillageDto {
 		}
 	}
 
-
-	public static void main( String[] args ) {
-		VillageDto v = VillageDto.builder()
-				  .id( 987L )
-				  .name( "Heart" )
-				  .build();
-		System.out.println( v );
-	}
 }

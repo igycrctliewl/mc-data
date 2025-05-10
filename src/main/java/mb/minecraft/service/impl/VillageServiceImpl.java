@@ -17,10 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class VillageServiceImpl implements VillageService {
 
+	/*
+	 * Should not be needed.  Service should be created and assigned as a bean
 	private static final VillageServiceImpl villageServiceImpl = new VillageServiceImpl();
 	public static VillageService getInstance() {
 		return villageServiceImpl;
 	}
+	 */
 
 	@Autowired
 	private VillageDao villageDao;
@@ -44,8 +47,8 @@ public class VillageServiceImpl implements VillageService {
 		VillageDto lookupVillage = this.retrieveVillage( name );
 		if( lookupVillage == null ) {
 			lookupVillage = VillageDto.builder()
-					  .name( name )
-					  .build();
+					.name( name )
+					.build();
 			lookupVillage = this.createNewVillage( lookupVillage );
 		}
 		return lookupVillage;
@@ -54,9 +57,9 @@ public class VillageServiceImpl implements VillageService {
 	@Override
 	public VillageDto createNewVillage( VillageDto dto ) {
 		Village village = villageDao.insertOne( Village.builder()
-				  .id( villageDao.getNextIdSeq() )
-				  .name( dto.getName() )
-				  .build() );
+				.id( villageDao.getNextIdSeq() )
+				.name( dto.getName() )
+				.build() );
 		return VillageMapper.map( village );
 	}
 
@@ -71,7 +74,7 @@ public class VillageServiceImpl implements VillageService {
 	}
 
 	@Override
-	public Boolean removeVillage( VillageDto dto ) {
+	public boolean removeVillage( VillageDto dto ) {
 		Village village = VillageMapper.map( dto );
 		return villageDao.deleteOne( village );
 	}
