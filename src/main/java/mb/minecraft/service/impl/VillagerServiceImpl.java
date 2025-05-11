@@ -1,14 +1,16 @@
 package mb.minecraft.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import mb.minecraft.dao.VillagerDao;
 import mb.minecraft.dto.VillagerDto;
 import mb.minecraft.mapper.VillagerMapper;
 import mb.minecraft.model.Villager;
 import mb.minecraft.service.VillagerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -42,8 +44,8 @@ public class VillagerServiceImpl implements VillagerService {
 		VillagerDto lookupVillager = this.retrieveVillager( name );
 		if( lookupVillager == null ) {
 			lookupVillager = VillagerDto.builder()
-					  .name( name )
-					  .build();
+					.name( name )
+					.build();
 			lookupVillager = this.createNewVillager( lookupVillager );
 		}
 		return lookupVillager;
@@ -59,15 +61,14 @@ public class VillagerServiceImpl implements VillagerService {
 	@Override
 	public List<VillagerDto> retrieveAllVillagers() {
 		List<Villager> villagers = villagerDao.selectAll();
-		List<VillagerDto> dtoList = new ArrayList<>();
-		for( Villager v : villagers ) {
-			dtoList.add( villagerMapper.map( v ) );
-		}
+		List<VillagerDto> dtoList = villagers.stream()
+				.map( v -> villagerMapper.map( v ) )
+				.collect( Collectors.toList() );
 		return dtoList;
 	}
 
 	@Override
-	public Boolean removeVillager( VillagerDto dto ) {
+	public boolean removeVillager( VillagerDto dto ) {
 		Villager villager = villagerMapper.map( dto );
 		return villagerDao.deleteOne( villager );
 	}
@@ -75,7 +76,7 @@ public class VillagerServiceImpl implements VillagerService {
 	@Override
 	public VillagerDto updateVillager( VillagerDto villager ) {
 		// TODO: implement new service method
-		throw new UnsupportedOperationException( "Not supported yet." );
+		throw new UnsupportedOperationException( "VillagerService#updateVillager is not supported in this version." );
 	}
 
 }

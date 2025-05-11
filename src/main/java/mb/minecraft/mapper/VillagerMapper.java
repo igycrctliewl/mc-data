@@ -1,11 +1,9 @@
 package mb.minecraft.mapper;
 
+import org.springframework.stereotype.Component;
+
 import mb.minecraft.dto.VillagerDto;
 import mb.minecraft.model.Villager;
-import mb.minecraft.service.VillageService;
-import mb.minecraft.service.VillagerTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * VillagerMapper manages transformations between the Village entity and the VillageDto.
@@ -13,48 +11,9 @@ import org.springframework.stereotype.Component;
  * @author mikebro
  */
 @Component
-public class VillagerMapper {
+public interface VillagerMapper {
 
-	@Autowired
-	private VillageService villageService;
-
-	@Autowired
-	private VillagerTypeService villagerTypeService;
-
-	public Villager map( VillagerDto dto ) {
-		if( dto == null ) {
-			return null;
-		}
-		Villager v = Villager.builder()
-				  .id( dto.getId() )
-				  .name( dto.getName() )
-				  .tagged( dto.isTagged() )
-				  .build();
-		if( dto.getVillage() != null ) {
-			v.setVillageId( dto.getVillage().getId() );
-		}
-		if( dto.getType() != null ) {
-			v.setTypeId( dto.getType().getId() );
-		}
-		return v;
-	}
-
-	public VillagerDto map( Villager villager ) {
-		if( villager == null ) {
-			return null;
-		}
-		VillagerDto dto = VillagerDto.builder()
-				  .id( villager.getId() )
-				  .name( villager.getName() )
-				  .tagged( villager.isTagged() )
-				  .build();
-		if( villager.getVillageId() != null ) {
-			dto.setVillage( villageService.retrieveVillage( villager.getVillageId() ) );
-		}
-		if( villager.getVillageId() != null ) {
-			dto.setType( villagerTypeService.retrieveVillagerType( villager.getTypeId() ) );
-		}
-		return dto;
-	}
+	public Villager map( VillagerDto dto );
+	public VillagerDto map( Villager villager );
 
 }

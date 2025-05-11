@@ -20,16 +20,14 @@ public class Villager implements Serializable {
 	private Long villageId;
 	private Long typeId;
 	/** Has this villager been assigned a NameTag in the game? */
-	private Boolean tagged;
+	private boolean tagged;
 
 
 	Villager() {
 		super();
-		this.tagged = false;
 	}
 	Villager( String name ) {
 		this.name = name;
-		this.tagged = false;
 	}
 
 
@@ -53,7 +51,7 @@ public class Villager implements Serializable {
 	 * @param tagged true if the Villager has been given a name tag,
 	 * otherwise false.
 	 */
-	public void setTagged( Boolean tagged ) {
+	public void setTagged( boolean tagged ) {
 		this.tagged = tagged;
 	}
 
@@ -62,7 +60,7 @@ public class Villager implements Serializable {
 	 * whether the Villager has been tagged.
 	 * @return the current value of the tagged property
 	 */
-	public Boolean isTagged() {
+	public boolean isTagged() {
 		return this.tagged;
 	}
 
@@ -96,15 +94,14 @@ public class Villager implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
 		sb.append( "name=" ).append( this.getName() ).append( COMMA_SEPARATOR );
-		sb.append( "isTagged=" ).append( this.isTagged().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "isTagged=" ).append( this.isTagged() ).append( COMMA_SEPARATOR );
 		sb.append( "villageId=" ).append( this.getVillageId() ).append( COMMA_SEPARATOR );
 		sb.append( "villagerTypeId=" ).append( this.getTypeId() );
 		sb.append( " )");
 		return sb.toString();
 	}
-
 
 
 	public static Villager.Builder builder() {
@@ -116,7 +113,7 @@ public class Villager implements Serializable {
 		private String name;
 		private Long typeId;
 		private Long villageId;
-		private Boolean tagged;
+		private boolean tagged;
 
 
 		public Villager.Builder id( Long id ) {
@@ -135,7 +132,7 @@ public class Villager implements Serializable {
 			this.villageId = villageId;
 			return this;
 		}
-		public Villager.Builder tagged( Boolean tagged ) {
+		public Villager.Builder tagged( boolean tagged ) {
 			this.tagged = tagged;
 			return this;
 		}

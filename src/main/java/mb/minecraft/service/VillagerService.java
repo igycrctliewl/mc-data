@@ -15,5 +15,5 @@ public interface VillagerService {
 	public VillagerDto createNewVillager( VillagerDto villager );
 	public List<VillagerDto> retrieveAllVillagers();
 	public VillagerDto updateVillager( VillagerDto villager );
-	public Boolean removeVillager( VillagerDto villager );
+	public boolean removeVillager( VillagerDto villager );
 }

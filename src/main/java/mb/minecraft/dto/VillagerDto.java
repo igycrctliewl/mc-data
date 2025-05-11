@@ -15,18 +15,17 @@ public class VillagerDto {
 	private String name;
 	private VillagerTypeDto type;
 	private VillageDto village;
-	private Boolean tagged;
+	private boolean tagged;
 
 	VillagerDto() {
 		super();
-		this.tagged = false;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
 		sb.append( "name=" ).append( this.getName() ).append( COMMA_SEPARATOR );
 		sb.append( "isTagged=" ).append( this.isTagged() ).append( COMMA_SEPARATOR );
 
@@ -64,15 +63,15 @@ public class VillagerDto {
 		this.name = name;
 	}
 
-	public void setTagged( Boolean tagged ) {
+	public void setTagged( boolean tagged ) {
 		this.tagged = tagged;
 	}
-	public Boolean isTagged() {
+	public boolean isTagged() {
 		return this.tagged;
 	}
 
 	public void setType( VillagerTypeDto newType ) {
-      this.type = newType;
+		this.type = newType;
 	}
 	public VillagerTypeDto getType() {
 		return this.type;
@@ -96,7 +95,7 @@ public class VillagerDto {
 		private String name;
 		//private VillagerTypeDto type;
 		private VillageDto village;
-		private Boolean tagged;
+		private boolean tagged;
 
 		public VillagerDto.Builder id( Long id ) {
 			this.id = id;
@@ -114,7 +113,7 @@ public class VillagerDto {
 			this.village = village;
 			return this;
 		}
-		public VillagerDto.Builder tagged( Boolean tagged ) {
+		public VillagerDto.Builder tagged( boolean tagged ) {
 			this.tagged = tagged;
 			return this;
 		}
@@ -125,19 +124,9 @@ public class VillagerDto {
 			villager.setName( this.name );
 			//villager.setType( this.type );
 			villager.setVillage( this.village );
-			villager.setTagged( this.tagged == null ? false : this.tagged );
+			villager.setTagged( this.tagged );
 			return villager;
 		}
 	}
 
-
-
-	public static void main( String[] args ) {
-		VillagerDto villager = VillagerDto.builder()
-				  .id( 1007L )
-				  .name( "Chloe" )
-				  .tagged( true )
-				  .build();
-		System.out.println( villager );
-	}
 }
