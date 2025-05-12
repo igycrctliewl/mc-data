@@ -30,7 +30,7 @@ public class VillagerType implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
 		sb.append( "profession=" ).append( this.getProfession() );
 		sb.append( " )");
 		return sb.toString();
@@ -77,19 +77,4 @@ public class VillagerType implements Serializable {
 		}
 	}
 
-
-
-	public static void main( String[] args ) {
-		VillagerType type = VillagerType.builder()
-				.id( 123L )
-				.profession( "Farmer" )
-				.build();
-		System.out.println( type.toString() );
-
-		type = VillagerType.builder()
-				.id( 321L )
-				.profession( "Fisherman" )
-				.build();
-		System.out.println( type.toString() );
-	}
 }

@@ -22,7 +22,7 @@ public class VillagerTypeDto {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
 		sb.append( "profession=" ).append( this.getProfession() );
 		sb.append( " )");
 		return sb.toString();
@@ -69,19 +69,4 @@ public class VillagerTypeDto {
 		}
 	}
 
-
-
-	public static void main( String[] args ) {
-		VillagerTypeDto type = VillagerTypeDto.builder()
-				.id( 123L )
-				.profession( "Farmer" )
-				.build();
-		System.out.println( type.toString() );
-
-		type = VillagerTypeDto.builder()
-				.id( 321L )
-				.profession( "Fisherman" )
-				.build();
-		System.out.println( type.toString() );
-	}
 }

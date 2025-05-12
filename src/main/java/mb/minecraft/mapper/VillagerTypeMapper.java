@@ -4,9 +4,6 @@ import mb.minecraft.dto.VillagerTypeDto;
 import mb.minecraft.model.VillagerType;
 
 
-
-
-
 /**
  * VillagerTypeMapper manages transformations between the VillagerType entity
  * and the VillagerTypeDto.
@@ -20,9 +17,9 @@ public class VillagerTypeMapper {
 			return null;
 		}
 		VillagerType v = VillagerType.builder()
-				  .id( dto.getId() )
-				  .profession( dto.getProfession() )
-				  .build();
+				.id( dto.getId() )
+				.profession( dto.getProfession() )
+				.build();
 		return v;
 	}
 
@@ -31,9 +28,9 @@ public class VillagerTypeMapper {
 			return null;
 		}
 		VillagerTypeDto dto = VillagerTypeDto.builder()
-				  .id( villagerType.getId() )
-				  .profession( villagerType.getProfession() )
-				  .build();
+				.id( villagerType.getId() )
+				.profession( villagerType.getProfession() )
+				.build();
 		return dto;
 	}
 }

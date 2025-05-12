@@ -10,17 +10,17 @@ import org.springframework.beans.factory.DisposableBean;
  * that VillagerType object will not change.  For this reason, VillagerTypeDao will
  * have no "update" method.<br>
  * <br>
- * No two VillagerType objects can have the same description (name).<br>
+ * No two VillagerType entities can have the same description (profession).<br>
  * <br>
  * A VillagerType can be deleted, but only after ensuring there are no villagers
- * using the type that will be deleted.
+ * using the that VillagerType.
  * @author mikebro
  */
 public interface VillagerTypeDao extends DisposableBean {
 	public VillagerType selectOneById( Long id );
-	public VillagerType selectOneByName( String name );
+	public VillagerType selectOneByName( String profession );
 	public List<VillagerType> selectAll();
 	public VillagerType insertOne( VillagerType villagerType);
 	public Long getNextIdSeq();
-	public Boolean deleteOne( VillagerType villagerType );
+	public boolean deleteOne( VillagerType villagerType );
 }

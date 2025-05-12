@@ -1,14 +1,16 @@
 package mb.minecraft.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import mb.minecraft.dao.VillagerTypeDao;
 import mb.minecraft.dto.VillagerTypeDto;
 import mb.minecraft.mapper.VillagerTypeMapper;
 import mb.minecraft.model.VillagerType;
 import mb.minecraft.service.VillagerTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -38,33 +40,38 @@ public class VillagerTypeServiceImpl implements VillagerTypeService {
 		VillagerTypeDto lookupType = this.retrieveVillagerType( profession );
 		if( lookupType == null ) {
 			lookupType = VillagerTypeDto.builder()
-					  .profession( profession )
-					  .build();
+					.profession( profession )
+					.build();
 			lookupType = this.createNewVillagerType( lookupType );
 		}
 		return lookupType;
 	}
 
 	@Override
+	/**
+	 * It occurs to me that this should be a private method.
+	 * Find-or-create allows the caller to create new types, but prevents the
+	 * caller from creating duplicate types.  This method opens the possibility
+	 * of creating duplicate types.
+	 */
 	public VillagerTypeDto createNewVillagerType( VillagerTypeDto villagerType ) {
 		VillagerType type = villagerTypeDao.insertOne( VillagerType.builder()
-				  .id( villagerTypeDao.getNextIdSeq() )
-				  .profession( villagerType.getProfession() )
-				  .build() );
+				.id( villagerTypeDao.getNextIdSeq() )
+				.profession( villagerType.getProfession() )
+				.build() );
 		return VillagerTypeMapper.map( type );
 	}
 
 	@Override
 	public List<VillagerTypeDto> retrieveAllVillagerTypes() {
-		List<VillagerTypeDto> list = new ArrayList<>();
-		for( VillagerType t : villagerTypeDao.selectAll() ) {
-			list.add( VillagerTypeMapper.map( t ) );
-		}
+		List<VillagerTypeDto> list = villagerTypeDao.selectAll().stream()
+				.map( t -> VillagerTypeMapper.map( t ) )
+				.collect( Collectors.toList() );
 		return list;
 	}
 
 	@Override
-	public Boolean removeVillagerType( VillagerTypeDto villagerType ) {
+	public boolean removeVillagerType( VillagerTypeDto villagerType ) {
 		return villagerTypeDao.deleteOne( VillagerTypeMapper.map( villagerType ) );
 	}
 
