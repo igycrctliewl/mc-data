@@ -17,6 +17,5 @@ public interface ItemService {
 	public ItemDto createNewItem( ItemDto item );
 	public ItemDto saveItem( ItemDto item );
 	public List<ItemDto> retrieveAllItems();
-	public ItemDto updateItem( ItemDto item );
-	public Boolean removeItem( ItemDto item );
+	public boolean removeItem( ItemDto item );
 }

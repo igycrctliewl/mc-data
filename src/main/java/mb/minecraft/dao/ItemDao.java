@@ -14,6 +14,9 @@ public interface ItemDao extends DisposableBean {
 	public List<Item> selectAll();
 	public Item insertOne( Item item );
 	public Item update( Item item );
+
+	/* why would anything outside the dao class need this service? */
 	public Long getNextIdSeq();
-	public Boolean deleteOne( Item item );
+
+	public boolean deleteOne( Item item );
 }

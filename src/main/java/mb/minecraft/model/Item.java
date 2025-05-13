@@ -2,7 +2,6 @@ package mb.minecraft.model;
 
 import static mb.minecraft.library.ObjectStringHelper.COMMA_SEPARATOR;
 
-import java.awt.Image;
 import java.io.Serializable;
 
 /**
@@ -17,9 +16,8 @@ public class Item implements Serializable {
 
 	private Long id;
 	private String name;
-   private String imageSource;
-	@Deprecated
-	private Image image;
+	private String imageSource;
+
 
 	public Item() {
 		super();
@@ -29,7 +27,7 @@ public class Item implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
 		sb.append( "name=" ).append( this.getName() ).append( " )" );
 		return sb.toString();
 	}
@@ -86,13 +84,4 @@ public class Item implements Serializable {
 		}
 	}
 
-
-	public static void main( String[] args ) {
-		Item item = Item.builder()
-				  .id( 1007L )
-				  .name( "Emerald" )
-				  .imageSource( "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/26/Emerald_JE3_BE3.png" )
-				  .build();
-		System.out.println( item );
-	}
 }

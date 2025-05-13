@@ -13,6 +13,9 @@ public interface VillagerDao extends DisposableBean {
 	public Villager selectOneByName( String name );
 	public List<Villager> selectAll();
 	public Villager insertOne( Villager villager );
+
+	/* why would anything outside the dao class need this service? */
 	public Long getNextIdSeq();
+
 	public boolean deleteOne( Villager villager );
 }

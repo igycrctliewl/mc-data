@@ -15,10 +15,10 @@ public class ItemMapper {
 			return null;
 		}
 		return Item.builder()
-				  .id( dto.getId() )
-				  .name( dto.getName() )
-				  .imageSource( dto.getImageSource() )
-				  .build();
+				.id( dto.getId() )
+				.name( dto.getName() )
+				.imageSource( dto.getImageSource() )
+				.build();
 	}
 
 	public static ItemDto map( Item item ) {
@@ -26,10 +26,10 @@ public class ItemMapper {
 			return null;
 		}
 		return ItemDto.builder()
-				  .id( item.getId() )
-				  .name( item.getName() )
-				  .imageSource( item.getImageSource() )
-				  .build();
+				.id( item.getId() )
+				.name( item.getName() )
+				.imageSource( item.getImageSource() )
+				.build();
 	}
 
 }

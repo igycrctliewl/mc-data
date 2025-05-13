@@ -5,7 +5,11 @@ import static mb.minecraft.library.ObjectStringHelper.COMMA_SEPARATOR;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * ItemDto is the application-internal representation of the Item entity.
@@ -16,10 +20,13 @@ import javax.imageio.ImageIO;
  */
 public class ItemDto {
 
+	private static final Logger logger = LogManager.getLogger( ItemDto.class );
+
 	private Long id;
 	private String name;
-   private String imageSource;
+	private String imageSource;
 	private Image image;
+
 
 	public ItemDto() {
 		super();
@@ -29,7 +36,7 @@ public class ItemDto {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
 		sb.append( "name=" ).append( this.getName() );
 		sb.append( " )");
 		return sb.toString();
@@ -65,8 +72,8 @@ public class ItemDto {
 			}
 		} catch( IOException e ) {
 			this.image = null;
-			System.err.printf( "Failed to load image from %s for item %s%n", this.getImageSource(), this.getName() );
-			e.printStackTrace( System.err );
+			logger.error( "Failed to load image from {} for item {}", this.getImageSource(), this.getName() );
+			logger.error( "Trace follows...", e );
 		}
 	}
 
@@ -101,13 +108,4 @@ public class ItemDto {
 		}
 	}
 
-
-	public static void main( String[] args ) {
-		ItemDto item = ItemDto.builder()
-				  .id( 1007L )
-				  .name( "Emerald" )
-				  .imageSource( "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/26/Emerald_JE3_BE3.png" )
-				  .build();
-		System.out.println( item );
-	}
 }

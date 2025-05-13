@@ -1,14 +1,17 @@
 package mb.minecraft.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import mb.minecraft.dao.ItemDao;
 import mb.minecraft.dto.ItemDto;
 import mb.minecraft.mapper.ItemMapper;
 import mb.minecraft.model.Item;
 import mb.minecraft.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 /**
  *
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ItemServiceImpl implements ItemService {
+
 
 	@Autowired
 	private ItemDao itemDao;
@@ -40,8 +44,8 @@ public class ItemServiceImpl implements ItemService {
 		ItemDto lookupItem = this.retrieveItem( name );
 		if( lookupItem == null ) {
 			lookupItem = ItemDto.builder()
-					  .name( name )
-					  .build();
+					.name( name )
+					.build();
 			lookupItem = this.createNewItem( lookupItem );
 		}
 		return lookupItem;
@@ -49,10 +53,8 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public ItemDto createNewItem( ItemDto dto ) {
-		Item item = itemDao.insertOne( Item.builder()
-				  .id( itemDao.getNextIdSeq() )
-				  .name( dto.getName() )
-				  .build() );
+		Item newItem = ItemMapper.map( dto );
+		Item item = itemDao.insertOne( newItem );
 		return ItemMapper.map( item );
 	}
 
@@ -64,24 +66,16 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public List<ItemDto> retrieveAllItems() {
-		List<Item> items = itemDao.selectAll();
-		List<ItemDto> dtoList = new ArrayList<>();
-		for( Item i : items ) {
-			dtoList.add( ItemMapper.map( i ) );
-		}
+		List<ItemDto> dtoList = itemDao.selectAll().stream() 
+				.map( i -> ItemMapper.map( i ) )
+				.collect( Collectors.toList() );
 		return dtoList;
 	}
 
 	@Override
-	public Boolean removeItem( ItemDto dto ) {
+	public boolean removeItem( ItemDto dto ) {
 		Item item = ItemMapper.map( dto );
 		return itemDao.deleteOne( item );
-	}
-
-	@Override
-	public ItemDto updateItem( ItemDto item ) {
-		// TODO implement new service method
-		throw new UnsupportedOperationException( "Not supported yet." );
 	}
 
 }
