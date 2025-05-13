@@ -93,7 +93,7 @@ public class VillagerDto {
 	public static class Builder {
 		private Long id;
 		private String name;
-		//private VillagerTypeDto type;
+		private VillagerTypeDto type;
 		private VillageDto village;
 		private boolean tagged;
 
@@ -105,10 +105,10 @@ public class VillagerDto {
 			this.name = name;
 			return this;
 		}
-/*		public VillagerDto.Builder type( VillagerTypeDto type ) {
+		public VillagerDto.Builder type( VillagerTypeDto type ) {
 			this.type = type;
 			return this;
-		} */
+		}
 		public VillagerDto.Builder village( VillageDto village ) {
 			this.village = village;
 			return this;
@@ -122,7 +122,7 @@ public class VillagerDto {
 			VillagerDto villager = new VillagerDto();
 			villager.setId( this.id );
 			villager.setName( this.name );
-			//villager.setType( this.type );
+			villager.setType( this.type );
 			villager.setVillage( this.village );
 			villager.setTagged( this.tagged );
 			return villager;
