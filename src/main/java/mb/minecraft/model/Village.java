@@ -25,7 +25,7 @@ public class Village implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
+		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
 		sb.append( "name=" ).append( this.getName() );
 		sb.append( " )");
 		return sb.toString();

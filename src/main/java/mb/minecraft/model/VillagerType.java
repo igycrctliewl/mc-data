@@ -39,12 +39,16 @@ public class VillagerType implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	private void setId( Long id ) {
-		this.id = id;
-	}
+
 	public String getProfession() {
 		return profession;
 	}
+
+	// Setters are private because VillagerType is an immutable object
+	private void setId( Long id ) {
+		this.id = id;
+	}
+
 	private void setProfession( String profession ) {
 		this.profession = profession;
 	}

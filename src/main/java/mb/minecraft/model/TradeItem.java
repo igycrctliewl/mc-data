@@ -11,42 +11,47 @@ import static mb.minecraft.library.ObjectStringHelper.COMMA_SEPARATOR;
 public class TradeItem {
 
 	private Long id;
-   private Long itemId;
-   private Integer quantity;
+	private Integer quantity;
+	private Long itemId;
 
-   private TradeItem() {}
+	public TradeItem() {
+		super();
+	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId().toString() ).append( COMMA_SEPARATOR );
-		sb.append( "itemId=" ).append( this.getItemId().toString() ).append( COMMA_SEPARATOR );
-		sb.append( "quantity=" ).append( this.getQuantity() ).append( " )" );
+		sb.append( super.toString() ).append( "( " )
+			.append( "id=" ).append( this.getId() )
+			.append( COMMA_SEPARATOR )
+			.append( "quantity=" ).append( this.getQuantity() )
+			.append( COMMA_SEPARATOR )
+			.append( "itemId=" ).append( this.getItemId() )
+			.append( " )" );
 		return sb.toString();
 	}
 
 
-   public void setId( Long newId ) {
-      this.id = newId;
-   }
-   public Long getId() {
-      return this.id;
-   }
+	public void setId( Long newId ) {
+		this.id = newId;
+	}
+	public Long getId() {
+		return this.id;
+	}
 
-   public void setItemId( Long newItemId ) {
-      this.itemId = newItemId;
-   }
-   public Long getItemId() {
-      return this.itemId;
-   }
+	public void setItemId( Long newItemId ) {
+		this.itemId = newItemId;
+	}
+	public Long getItemId() {
+		return this.itemId;
+	}
 
-   public void setQuantity( int newQuantity ) {
-      this.quantity = newQuantity;
-   }
-   public Integer getQuantity() {
-      return this.quantity;
-   }
+	public void setQuantity( int newQuantity ) {
+		this.quantity = newQuantity;
+	}
+	public Integer getQuantity() {
+		return this.quantity;
+	}
 
 
 	public static TradeItem.Builder builder() {
