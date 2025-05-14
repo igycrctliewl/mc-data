@@ -1,8 +1,10 @@
 package mb.minecraft.dao;
 
 import java.util.List;
-import mb.minecraft.model.VillagerType;
+
 import org.springframework.beans.factory.DisposableBean;
+
+import mb.minecraft.model.VillagerType;
 
 /**
  * The contract for VillagerTypeDao ensures that a VillagerType object, once created,
