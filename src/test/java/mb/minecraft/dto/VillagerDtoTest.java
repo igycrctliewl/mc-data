@@ -14,12 +14,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class VillagerDtoTest {
 
-	private static VillagerTypeDto VILLAGER_TYPE = VillagerTypeDto.builder()
+	private static final VillagerTypeDto VILLAGER_TYPE = VillagerTypeDto.builder()
 			.id( 301L )
 			.profession( "Cleric" )
 			.build();
 
-	private static VillageDto VILLAGE = VillageDto.builder()
+	private static final VillageDto VILLAGE = VillageDto.builder()
 			.id( 201L )
 			.name( "Deep Water Cove" )
 			.build();
