@@ -72,8 +72,8 @@ public class ItemDto {
 			}
 		} catch( IOException e ) {
 			this.image = null;
-			logger.error( "Failed to load image from {} for item {}", this.getImageSource(), this.getName() );
-			logger.error( "Trace follows...", e );
+			logger.error( "Failed to load image from >{}< for item >{}<", this.getImageSource(), this.getName() );
+			//logger.error( "Trace follows...", e );
 		}
 	}
 
