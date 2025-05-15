@@ -84,8 +84,13 @@ public class VillagerTypeServiceTest {
 	@Test
 	public void testFindOrCreateNew() {
 		when( villagerTypeDao.selectOneByName( any() )).thenReturn( null );
-		when( villagerTypeDao.insertOne( any( VillagerType.class ) )).thenAnswer( i -> i.getArgument(0) );
-		when( villagerTypeDao.getNextIdSeq() ).thenReturn( 55L );
+		when( villagerTypeDao.insertOne( any( VillagerType.class ) )).thenAnswer( i -> {
+			VillagerType v = i.getArgument(0);
+			return VillagerType.builder()
+					.id( 55L )
+					.profession( v.getProfession() )
+					.build();
+		});
 		VillagerTypeDto newType = villagerTypeService.findOrCreateVillagerType( "Shepherd" );
 		assertNotNull( newType );
 		assertEquals( 55L, newType.getId().longValue() );
@@ -94,8 +99,13 @@ public class VillagerTypeServiceTest {
 
 	@Test
 	public void testCreateNewVillagerType() {
-		when( villagerTypeDao.insertOne( any( VillagerType.class ) )).thenAnswer( i -> i.getArgument(0) );
-		when( villagerTypeDao.getNextIdSeq() ).thenReturn( 22L );
+		when( villagerTypeDao.insertOne( any( VillagerType.class ) )).thenAnswer( i -> {
+			VillagerType v = i.getArgument(0);
+			return VillagerType.builder()
+					.id( 22L )
+					.profession( v.getProfession() )
+					.build();
+		});
 		VillagerTypeDto newVillagerType = VillagerTypeDto.builder()
 				.profession( "Cartographer" )
 				.build();

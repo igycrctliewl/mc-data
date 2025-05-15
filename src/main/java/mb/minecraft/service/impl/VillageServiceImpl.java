@@ -2,13 +2,15 @@ package mb.minecraft.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import mb.minecraft.dao.VillageDao;
 import mb.minecraft.dto.VillageDto;
 import mb.minecraft.mapper.VillageMapper;
 import mb.minecraft.model.Village;
 import mb.minecraft.service.VillageService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -17,19 +19,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class VillageServiceImpl implements VillageService {
 
-	/*
-	 * Should not be needed.  Service should be created and assigned as a bean
-	private static final VillageServiceImpl villageServiceImpl = new VillageServiceImpl();
-	public static VillageService getInstance() {
-		return villageServiceImpl;
-	}
-	 */
-
 	@Autowired
 	private VillageDao villageDao;
 
 	private VillageServiceImpl() {}
-
 
 
 	@Override
@@ -57,7 +50,7 @@ public class VillageServiceImpl implements VillageService {
 	@Override
 	public VillageDto createNewVillage( VillageDto dto ) {
 		Village village = villageDao.insertOne( Village.builder()
-				.id( villageDao.getNextIdSeq() )
+				.id( dto.getId() )
 				.name( dto.getName() )
 				.build() );
 		return VillageMapper.map( village );

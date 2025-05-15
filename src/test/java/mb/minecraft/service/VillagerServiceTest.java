@@ -114,8 +114,11 @@ public class VillagerServiceTest {
 		when( villagerDao.selectOneByName( any() )).thenReturn( null );
 		when( villagerMapper.map( isNull( Villager.class ) ) ).thenReturn( null );
 		when( villagerMapper.map( any( VillagerDto.class ) ) ).thenAnswer( i -> mapVillagerDto( i.getArgument(0) ) );
-		when( villagerDao.insertOne( any( Villager.class ) )).thenAnswer( i -> i.getArgument(0) );
-		when( villagerDao.getNextIdSeq() ).thenReturn( 555L );
+		when( villagerDao.insertOne( any( Villager.class ) )).thenAnswer( i -> {
+			Villager v = i.getArgument(0);
+			v.setId( 555L );
+			return v;
+		});
 		VillagerDto newVillager = villagerService.findOrCreateVillager( "Sparky" );
 		assertNotNull( newVillager );
 		assertEquals( 555L, newVillager.getId().longValue() );
@@ -124,9 +127,12 @@ public class VillagerServiceTest {
 
 	@Test
 	public void testCreateNewVillager() {
-		when( villagerDao.insertOne( any( Villager.class ) )).thenAnswer( i -> i.getArgument(0) );
+		when( villagerDao.insertOne( any( Villager.class ) )).thenAnswer( i -> {
+			Villager v = i.getArgument(0);
+			v.setId( 212L );
+			return v;
+		});
 		when( villagerMapper.map( any( VillagerDto.class ) ) ).thenAnswer( i -> mapVillagerDto( i.getArgument(0) ) );
-		when( villagerDao.getNextIdSeq() ).thenReturn( 212L );
 		VillagerDto newVillager = VillagerDto.builder()
 				.name( "Shelia" )
 				.tagged( true )

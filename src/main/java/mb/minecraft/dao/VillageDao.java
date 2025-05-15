@@ -15,9 +15,5 @@ public interface VillageDao extends DisposableBean {
 	public Village selectOneByName( String name );
 	public List<Village> selectAll();
 	public Village insertOne( Village village );
-
-	/* why would anything outside the dao class need this service? */
-	public Long getNextIdSeq();
-
 	public boolean deleteOne( Village village );
 }

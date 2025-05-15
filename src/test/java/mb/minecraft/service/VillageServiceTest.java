@@ -85,8 +85,12 @@ public class VillageServiceTest {
 	@Test
 	public void testFindOrCreateNew() {
 		when( villageDao.selectOneByName( any() )).thenReturn( null );
-		when( villageDao.insertOne( any( Village.class ) )).thenAnswer( i -> i.getArgument(0) );
-		when( villageDao.getNextIdSeq() ).thenReturn( 555L );
+		when( villageDao.insertOne( any( Village.class ) )).thenAnswer( i -> {
+			Village v = i.getArgument(0);
+			v.setId( 555L );
+			return v;
+		});
+		//when( villageDao.getNextIdSeq() ).thenReturn( 555L );
 		VillageDto village = villageService.findOrCreateVillage( "Northern Outpost" );
 		assertNotNull( village );
 		assertEquals( 555L, village.getId().longValue() );
@@ -95,8 +99,11 @@ public class VillageServiceTest {
 
 	@Test
 	public void testCreateNewVillage() {
-		when( villageDao.insertOne( any( Village.class ) )).thenAnswer( i -> i.getArgument(0) );
-		when( villageDao.getNextIdSeq() ).thenReturn( 415L );
+		when( villageDao.insertOne( any( Village.class ) )).thenAnswer( i -> {
+			Village v = i.getArgument(0);
+			v.setId( 415L );
+			return v;
+		});
 		VillageDto newVillage = VillageDto.builder()
 				.name( "San Francisco" )
 				.build();

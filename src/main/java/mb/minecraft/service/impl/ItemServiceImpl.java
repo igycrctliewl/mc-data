@@ -53,8 +53,7 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public ItemDto createNewItem( ItemDto dto ) {
-		Item newItem = ItemMapper.map( dto );
-		Item item = itemDao.insertOne( newItem );
+		Item item = itemDao.insertOne( ItemMapper.map( dto ) );
 		return ItemMapper.map( item );
 	}
 

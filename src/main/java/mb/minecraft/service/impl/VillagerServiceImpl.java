@@ -53,7 +53,6 @@ public class VillagerServiceImpl implements VillagerService {
 
 	@Override
 	public VillagerDto createNewVillager( VillagerDto dto ) {
-		dto.setId( villagerDao.getNextIdSeq() );
 		Villager villager = villagerDao.insertOne( villagerMapper.map( dto ) );
 		return villagerMapper.map( villager );
 	}

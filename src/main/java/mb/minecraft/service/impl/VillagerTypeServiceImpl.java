@@ -55,10 +55,7 @@ public class VillagerTypeServiceImpl implements VillagerTypeService {
 	 * of creating duplicate types.
 	 */
 	public VillagerTypeDto createNewVillagerType( VillagerTypeDto villagerType ) {
-		VillagerType type = villagerTypeDao.insertOne( VillagerType.builder()
-				.id( villagerTypeDao.getNextIdSeq() )
-				.profession( villagerType.getProfession() )
-				.build() );
+		VillagerType type = villagerTypeDao.insertOne( VillagerTypeMapper.map( villagerType ) );
 		return VillagerTypeMapper.map( type );
 	}
 

@@ -8,6 +8,8 @@ package mb.minecraft.dao;
  */
 public class ForeignKeyConstraintException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String FOREIGN_KEY_CONSTRAINT_ERROR = "Cannot delete or update %s object with id %s: Object is assigned to %s with id %s";
 
 	public ForeignKeyConstraintException( String constraintMessage ) {

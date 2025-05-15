@@ -6,6 +6,8 @@ package mb.minecraft.dao;
  */
 public class DaoConstraintException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String UNIQUE_CONSTRAINT_ERROR = "Dataset of type \"%s\" does not allow duplicate values for field \"%s\"";
 
 	private Object model;
