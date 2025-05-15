@@ -15,5 +15,6 @@ public interface VillageDao extends DisposableBean {
 	public Village selectOneByName( String name );
 	public List<Village> selectAll();
 	public Village insertOne( Village village );
+	public Village update( Village village );
 	public boolean deleteOne( Village village );
 }
