@@ -9,7 +9,7 @@ import static mb.minecraft.library.ObjectStringHelper.COMMA_SEPARATOR;
  * Part of entity redesign.
  * @author mikebro
  */
-public class TradeItemDto {
+public class TradeItemDto implements Comparable<TradeItemDto> {
 
 	private Long id;
 	private Integer quantity;
@@ -59,6 +59,14 @@ public class TradeItemDto {
 	public void setItem( ItemDto item ) {
 		this.item = item;
 	}
+
+	@Override
+	public int compareTo( TradeItemDto other ) {
+		// TODO: I need to identify some property as the sort key for trade items
+		// Perhaps a sequence number.  Should it be related to a villager?
+		return 0;
+	}
+
 
 
 	public static TradeItemDto.Builder builder() {

@@ -9,7 +9,7 @@ import static mb.minecraft.library.ObjectStringHelper.COMMA_SEPARATOR;
  * Part of entity redesign.
  * @author mikebro
  */
-public class VillagerTypeDto {
+public class VillagerTypeDto implements Comparable<VillagerTypeDto> {
 
 	private Long id;
 	private String profession;
@@ -44,6 +44,15 @@ public class VillagerTypeDto {
 
 	private void setProfession( String profession ) {
 		this.profession = profession;
+	}
+
+	@Override
+	public int compareTo( VillagerTypeDto other ) {
+		if( other != null ) {
+			return this.getProfession().compareTo( other.getProfession() );
+		} else {
+			return 1;
+		}
 	}
 
 

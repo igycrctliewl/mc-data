@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
  * Part of entity redesign.
  * @author mikebro
  */
-public class ItemDto {
+public class ItemDto implements Comparable<ItemDto> {
 
 	private static final Logger logger = LogManager.getLogger( ItemDto.class );
 
@@ -73,9 +73,18 @@ public class ItemDto {
 		} catch( IOException e ) {
 			this.image = null;
 			logger.error( "Failed to load image from >{}< for item >{}<", this.getImageSource(), this.getName() );
-			//logger.error( "Trace follows...", e );
 		}
 	}
+
+	@Override
+	public int compareTo( ItemDto other ) {
+		if( other != null ) {
+			return this.getName().compareTo( other.getName() );
+		} else {
+			return 1;
+		}
+	}
+
 
 
 	public static ItemDto.Builder builder() {
