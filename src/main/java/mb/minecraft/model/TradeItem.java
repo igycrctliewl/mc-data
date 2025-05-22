@@ -2,27 +2,43 @@ package mb.minecraft.model;
 
 import static mb.minecraft.library.ObjectStringHelper.COMMA_SEPARATOR;
 
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
- * TradeItem is the persistent entity representing a thing that a villager asks
+ * TradeItem is the persistent entity representing a thing that a villager requires
  * or offers in trade.  The TradeItem includes a reference to an item, and a quantity.
- * New version of TradeItem class for entity redesign.
  * @author mikebro
  */
-public class TradeItem {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class TradeItem implements Serializable {
 
-	private Long id;
+	private static final long serialVersionUID = -421034078077683753L;
+
+	private Long tradeId;
+	private OfferRequire offerRequire;
+	private Integer seqno;
 	private Integer quantity;
 	private Long itemId;
+	private String memo;
 
-	public TradeItem() {
-		super();
-	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( super.toString() ).append( "( " )
-			.append( "id=" ).append( this.getId() )
+			.append( "tradeId=" ).append( this.getTradeId() )
+			.append( COMMA_SEPARATOR )
+			.append( "offerRequire=" ).append( this.getOfferRequire().getCode() )
+			.append( COMMA_SEPARATOR )
+			.append( "seqno=" ).append( this.getSeqno() )
 			.append( COMMA_SEPARATOR )
 			.append( "quantity=" ).append( this.getQuantity() )
 			.append( COMMA_SEPARATOR )
@@ -31,56 +47,4 @@ public class TradeItem {
 		return sb.toString();
 	}
 
-
-	public void setId( Long newId ) {
-		this.id = newId;
-	}
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setItemId( Long newItemId ) {
-		this.itemId = newItemId;
-	}
-	public Long getItemId() {
-		return this.itemId;
-	}
-
-	public void setQuantity( int newQuantity ) {
-		this.quantity = newQuantity;
-	}
-	public Integer getQuantity() {
-		return this.quantity;
-	}
-
-
-	public static TradeItem.Builder builder() {
-		return new TradeItem.Builder();
-	}
-
-	public static class Builder {
-		private Long id;
-		private Long itemId;
-		private Integer quantity;
-
-		public Builder id( long id ) {
-			this.id = id;
-			return this;
-		}
-		public Builder itemId( long itemId ) {
-			this.itemId = itemId;
-			return this;
-		}
-		public Builder quantity( int quantity ) {
-			this.quantity = quantity;
-			return this;
-		}
-		public TradeItem build() {
-			TradeItem i = new TradeItem();
-			i.setId( id );
-			i.setItemId( itemId );
-			i.setQuantity( quantity );
-			return i;
-		}
-	}
 }

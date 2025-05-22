@@ -10,22 +10,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Item is the persistent entity representing some item that a villager might
- * offer or ask for in a trade.
- * New version of Item class for entity redesign.
+ * Trade is the persistent entity representing an individual trade advertised by a villager.
+ * This row both declares the trade entity and relates the trade to a villager.
  * @author mikebro
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item implements Serializable {
+public class Trade implements Serializable {
 
-	private static final long serialVersionUID = -6539458668001366718L;
+	private static final long serialVersionUID = -1936991223553152479L;
 
 	private Long id;
-	private String name;
-	private String imageSource;
+	private Long villagerId;
+	private Integer tradeSeqno;
 
 
 	@Override
@@ -34,7 +33,9 @@ public class Item implements Serializable {
 		sb.append( super.toString() ).append( "( " )
 			.append( "id=" ).append( this.getId() )
 			.append( COMMA_SEPARATOR )
-			.append( "name=" ).append( this.getName() )
+			.append( "villagerId=" ).append( this.getVillagerId() )
+			.append( COMMA_SEPARATOR )
+			.append( "tradeSeqno=" ).append( this.getTradeSeqno() )
 			.append( " )" );
 		return sb.toString();
 	}
