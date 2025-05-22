@@ -17,7 +17,7 @@ public enum OfferRequire {
 		return offerRequire;
 	}
 
-	public OfferRequire getFromCode( String code ) {
+	public static OfferRequire getFromCode( String code ) {
 		if( OFFER.getCode().equals( code ) )
 			return OFFER;
 		if( REQUIRE.getCode().equals( code ) )

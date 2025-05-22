@@ -36,7 +36,7 @@ public class TradeItem implements Serializable {
 		sb.append( super.toString() ).append( "( " )
 			.append( "tradeId=" ).append( this.getTradeId() )
 			.append( COMMA_SEPARATOR )
-			.append( "offerRequire=" ).append( this.getOfferRequire().getCode() )
+			.append( "offerRequire=" ).append( this.getOfferRequire() )
 			.append( COMMA_SEPARATOR )
 			.append( "seqno=" ).append( this.getSeqno() )
 			.append( COMMA_SEPARATOR )
