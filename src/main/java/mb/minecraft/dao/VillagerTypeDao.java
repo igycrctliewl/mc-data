@@ -7,10 +7,10 @@ import org.springframework.beans.factory.DisposableBean;
 import mb.minecraft.model.VillagerType;
 
 /**
- * The contract for VillagerTypeDao ensures that a VillagerType object, once created,
- * is immutable.  A VillagerType can be assigned to a Villager with certainty that
- * that VillagerType object will not change.  For this reason, VillagerTypeDao will
- * have no "update" method.<br>
+ * A VillagerType object, once created, is immutable.
+ * A VillagerType can be assigned to a Villager with certainty that
+ * that VillagerType object will not change.  For this reason,
+ * VillagerTypeDao will have no "update" method.<br>
  * <br>
  * No two VillagerType entities can have the same description (profession).<br>
  * <br>

@@ -1,0 +1,73 @@
+
+DAO contract for Minecraft Economy data access
+
+
+	private static final Logger logger = LogManager.getLogger( Impl.class );
+		declare a logger for possible future use
+
+	@PostConstruct
+	public void init()
+		Declare a post-construct initialization routine
+		This will handle initializations that cannot be performed in the constructor
+
+
+	private EntityImpl()
+		a no-arg constructor for object create, as needed
+
+
+	Entity selectOneById( Long id )
+		lookup entity by its ID key
+		If found, return the entity
+		If not found, return null
+
+
+	Entity selectOneByName( String name )
+		lookup entity by its NAME (string)
+		Does not applied to entities that do not have NAME fields (or similar)
+		If found, return the entity
+		If not found, return null
+
+
+	List<Entity> selectAll()
+		return a list of all the entities currently stored in the repository
+		if there are no entities, return an empty list
+
+
+	List<Entity> selectAll( Entity otherEntity )
+		return a list of all the entities related to some "other" entity
+		if there are no entities, return an empty list
+		This method may be appropriate for some entities and may not apply to other entities.
+
+
+	Entity insertOne( Entity entity )
+		Add a new entity to the repository
+		This class and this method must be responsible for maintaining a unique key
+		This class and method should also be responsible for any other constraints in the repository
+
+
+**** PROPOSED NEW SERVICE ****
+	List<Entity> insert( List<Entity> entities )
+		Add many new entities to the repository
+		This class and this method must be responsible for maintaining a unique key
+		The method returns the list of entities, with the unique key updated as generated.
+		This class and method should also be responsible for any other constraints in the repository
+
+
+	Entity update( Entity entity ) {
+		This is an update action.  The implication is there is already an Entity to update
+		lookup entity by its ID key
+		If a matching entity was found, replace it with the argument entity; return the entity
+		If no matching entity was found, make no change and return null
+
+
+	boolean deleteOne( Entity entity ) {
+		The DAO class is responsible for maintaining referential integrity when asked to delete an entity
+		If the requested entity is used as a property of any parent entity, the request must be denied
+		lookup entity by its ID key
+		If a matching entity was found, remove the entity from the repository; return true
+		If no matching entity was found, there is nothing to remove; return false
+
+
+	public void destroy() throws Exception
+		a shutdown method, for any save actions or other cleanup, as needed
+
