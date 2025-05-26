@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import lombok.Data;
+
 /**
  * ItemDto is the application-internal representation of the Item entity.
  * This should be a complete version of the object assembled from the data
@@ -18,6 +20,7 @@ import org.apache.logging.log4j.Logger;
  * Part of entity redesign.
  * @author mikebro
  */
+@Data
 public class ItemDto implements Comparable<ItemDto> {
 
 	private static final Logger logger = LogManager.getLogger( ItemDto.class );
@@ -43,28 +46,19 @@ public class ItemDto implements Comparable<ItemDto> {
 	}
 
 
-	public Long getId() {
-		return id;
-	}
-	public void setId( Long id ) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName( String name ) {
-		this.name = name;
-	}
-	public String getImageSource() {
-		return imageSource;
-	}
 	public void setImageSource( String imageSource ) {
 		this.imageSource = imageSource;
 		loadImage();
 	}
+
 	public Image getImage() {
 		return this.image;
 	}
+	@SuppressWarnings("unused")
+	private void setImage( Object image ) {
+		throw new UnsupportedOperationException();
+	}
+
 	private void loadImage() {
 		try {
 			if( this.imageSource != null ) {
