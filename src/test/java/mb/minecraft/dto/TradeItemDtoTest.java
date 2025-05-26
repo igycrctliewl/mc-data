@@ -1,14 +1,11 @@
 package mb.minecraft.dto;
 
+import static mb.minecraft.model.OfferRequire.OFFER;
+import static mb.minecraft.model.OfferRequire.REQUIRE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static mb.minecraft.model.OfferRequire.OFFER;
-import static mb.minecraft.model.OfferRequire.REQUIRE;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

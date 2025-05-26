@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.DisposableBean;
 
 import mb.minecraft.model.Trade;
-import mb.minecraft.model.TradeItem;
 import mb.minecraft.model.Villager;
 
 /**
