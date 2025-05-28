@@ -48,11 +48,14 @@ public class VillagerTypeServiceImpl implements VillagerTypeService {
 	}
 
 	@Override
-	/**
-	 * It occurs to me that this should be a private method.
+	/* It occurs to me that this should be a private method.
 	 * Find-or-create allows the caller to create new types, but prevents the
 	 * caller from creating duplicate types.  This method opens the possibility
 	 * of creating duplicate types.
+	 * 
+	 * Nope, I'm overruling that earlier concern.  The responsiblity for preventing
+	 * duplicate villager types (duplicate professions) lies with the Dao implementation.
+	 * This method is fine.
 	 */
 	public VillagerTypeDto createNewVillagerType( VillagerTypeDto villagerType ) {
 		VillagerType type = villagerTypeDao.insertOne( VillagerTypeMapper.map( villagerType ) );

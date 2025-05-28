@@ -1,7 +1,6 @@
 package mb.minecraft.mapper;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
@@ -13,12 +12,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import mb.minecraft.dto.TradeDto;
-import mb.minecraft.dto.VillageDto;
 import mb.minecraft.dto.VillagerDto;
-import mb.minecraft.dto.VillagerTypeDto;
 import mb.minecraft.mapper.impl.TradeMapperImpl;
 import mb.minecraft.model.Trade;
-import mb.minecraft.model.Villager;
 import mb.minecraft.service.VillagerService;
 
 

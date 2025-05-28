@@ -45,7 +45,6 @@ DAO contract for Minecraft Economy data access
 		This class and method should also be responsible for any other constraints in the repository
 
 
-**** PROPOSED NEW SERVICE ****
 	List<Entity> insert( List<Entity> entities )
 		Add many new entities to the repository
 		This class and this method must be responsible for maintaining a unique key

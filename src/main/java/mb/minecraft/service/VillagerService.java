@@ -14,6 +14,6 @@ public interface VillagerService {
 	public VillagerDto findOrCreateVillager( String name );
 	public VillagerDto createNewVillager( VillagerDto villager );
 	public List<VillagerDto> retrieveAllVillagers();
-	public VillagerDto updateVillager( VillagerDto villager );
+	public VillagerDto saveVillager( VillagerDto villager );
 	public boolean removeVillager( VillagerDto villager );
 }

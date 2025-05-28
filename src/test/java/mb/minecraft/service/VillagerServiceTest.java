@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -169,15 +168,17 @@ public class VillagerServiceTest {
 	}
 
 	@Test
-	public void testUpdateVillagerFail() {
+	public void testUpdateVillager() {
+		when( villagerDao.update( any( Villager.class ) )).thenAnswer( i -> i.getArgument(0) );
+		when( villagerMapper.map( any( VillagerDto.class ) ) ).thenAnswer( i -> mapVillagerDto( i.getArgument(0) ) );
 		VillagerDto updateVillager = VillagerDto.builder()
+				.id( 1L )
 				.name( "MikeBro" )
 				.build();
-		// updateVillager has not been implemented
-		Exception ex = assertThrows( UnsupportedOperationException.class, () -> {
-			villagerService.updateVillager( updateVillager );
-		});
-		assertEquals( "VillagerService#updateVillager is not supported in this version.", ex.getMessage() );
+		VillagerDto updatedVillager = villagerService.saveVillager( updateVillager );
+		assertFalse( updateVillager == updatedVillager );
+		assertEquals( 1L, updatedVillager.getId().longValue() );
+		assertEquals( "MikeBro", updatedVillager.getName() );
 	}
 
 

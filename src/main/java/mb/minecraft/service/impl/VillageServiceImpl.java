@@ -72,4 +72,10 @@ public class VillageServiceImpl implements VillageService {
 		return villageDao.deleteOne( village );
 	}
 
+	@Override
+	public VillageDto saveVillage( VillageDto dto ) {
+		Village village = VillageMapper.map( dto );
+		return VillageMapper.map( villageDao.update( village ) );
+	}
+
 }

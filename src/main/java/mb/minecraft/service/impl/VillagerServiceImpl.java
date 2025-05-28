@@ -73,9 +73,9 @@ public class VillagerServiceImpl implements VillagerService {
 	}
 
 	@Override
-	public VillagerDto updateVillager( VillagerDto villager ) {
-		// TODO: implement new service method
-		throw new UnsupportedOperationException( "VillagerService#updateVillager is not supported in this version." );
+	public VillagerDto saveVillager( VillagerDto dto ) {
+		Villager villager = villagerMapper.map( dto );
+		return villagerMapper.map( villagerDao.update( villager ) );
 	}
 
 }

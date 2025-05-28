@@ -4,7 +4,6 @@ import java.util.List;
 import mb.minecraft.dto.VillageDto;
 
 /**
- * There is no update method.  This should be immutable like VillagerType
  * @author mikebro
  */
 public interface VillageService {
@@ -14,5 +13,6 @@ public interface VillageService {
 	public VillageDto findOrCreateVillage( String name );
 	public VillageDto createNewVillage( VillageDto village );
 	public List<VillageDto> retrieveAllVillages();
+	public VillageDto saveVillage( VillageDto village );
 	public boolean removeVillage( VillageDto village );
 }
