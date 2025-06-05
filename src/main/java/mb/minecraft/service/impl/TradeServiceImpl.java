@@ -34,7 +34,7 @@ public class TradeServiceImpl implements TradeService {
 
 
 	@Override
-	public TradeDto retrieveTrade( Long id ) {
+	public TradeDto retrieveTrade( int id ) {
 		return tradeMapper.map( tradeDao.selectOneById( id ) );
 	}
 

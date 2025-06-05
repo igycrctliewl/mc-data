@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VillageDto implements Comparable<VillageDto> {
 
-	private Long id;
+	private Integer id;
 	private String name;
 
 

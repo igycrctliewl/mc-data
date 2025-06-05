@@ -36,12 +36,12 @@ public class VillagerMapperTest {
 
 	@Test
 	public void testMapEntityToDto() {
-		when( villageService.retrieveVillage( 1L ) ).thenReturn( prepareVillageDto() );
-		when( villagerTypeService.retrieveVillagerType( 2L ) ).thenReturn( prepareVillagerTypeDto() );
+		when( villageService.retrieveVillage( 1 ) ).thenReturn( prepareVillageDto() );
+		when( villagerTypeService.retrieveVillagerType( 2 ) ).thenReturn( prepareVillagerTypeDto() );
 		VillagerDto dto = villagerMapper.map( prepareVillagerEntity() );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 101L, dto.getId().longValue() );
+		assertEquals( 101, dto.getId().intValue() );
 		assertEquals( "Gary", dto.getName() );
 		assertFalse( dto.isTagged() );
 		assertEquals( "San Mateo", dto.getVillage().getName() );
@@ -51,13 +51,13 @@ public class VillagerMapperTest {
 	@Test
 	public void testMapBasicEntityToDto() {
 		Villager v = Villager.builder()
-				.id( 101L )
+				.id( 101 )
 				.name( "Gary" )
 				.build();
 		VillagerDto dto = villagerMapper.map( v );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 101L, dto.getId().longValue() );
+		assertEquals( 101, dto.getId().intValue() );
 		assertEquals( "Gary", dto.getName() );
 		assertFalse( dto.isTagged() );
 		assertNull( dto.getVillage() );
@@ -77,23 +77,23 @@ public class VillagerMapperTest {
 		Villager entity = villagerMapper.map( dto );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 101L, entity.getId().longValue() );
+		assertEquals( 101, entity.getId().intValue() );
 		assertEquals( "Gary", entity.getName() );
 		assertFalse( entity.isTagged() );
-		assertEquals( 1L, entity.getVillageId().longValue() );
-		assertEquals( 2L, entity.getTypeId().longValue() );
+		assertEquals( 1, entity.getVillageId().intValue() );
+		assertEquals( 2, entity.getTypeId().intValue() );
 	}
 
 	@Test
 	public void testMapBasicDtoToEntity() {
 		VillagerDto dto = VillagerDto.builder()
-				.id( 101L )
+				.id( 101 )
 				.name("Gary")
 				.build();
 		Villager entity = villagerMapper.map( dto );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 101L, entity.getId().longValue() );
+		assertEquals( 101, entity.getId().intValue() );
 		assertEquals( "Gary", entity.getName() );
 		assertFalse( entity.isTagged() );
 		assertNull( entity.getVillageId() );
@@ -111,16 +111,16 @@ public class VillagerMapperTest {
 
 	private static Villager prepareVillagerEntity() {
 		return Villager.builder()
-				.id( 101L )
+				.id( 101 )
 				.name("Gary")
-				.villageId( 1L )
-				.typeId( 2L )
+				.villageId( 1 )
+				.typeId( 2 )
 				.build();
 	}
 
 	private static VillagerDto prepareVillagerDto() {
 		return VillagerDto.builder()
-				.id( 101L )
+				.id( 101 )
 				.name("Gary")
 				.village( prepareVillageDto() )
 				.type( prepareVillagerTypeDto() )
@@ -129,14 +129,14 @@ public class VillagerMapperTest {
 
 	private static VillageDto prepareVillageDto() {
 		return VillageDto.builder()
-				.id( 1L )
+				.id( 1 )
 				.name("San Mateo")
 				.build();
 	}
 
 	private static VillagerTypeDto prepareVillagerTypeDto() {
 		return VillagerTypeDto.builder()
-				.id( 2L )
+				.id( 2 )
 				.profession("Farmer")
 				.build();
 	}

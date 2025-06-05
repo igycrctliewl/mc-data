@@ -20,11 +20,11 @@ public class VillageDtoTest {
 	@Test
 	public void testDtoByBuilder() {
 		VillageDto village = VillageDto.builder()
-				.id( 101L )
+				.id( 101 )
 				.name( "Pacifica" )
 				.build();
 		assertNotNull( village );
-		assertEquals( 101L, village.getId().longValue() );
+		assertEquals( 101, village.getId().intValue() );
 		assertEquals( "Pacifica", village.getName() );
 
 		String patternString = "mb.minecraft.dto.VillageDto@\\w*\\( id=101, name=Pacifica \\)";
@@ -47,11 +47,11 @@ public class VillageDtoTest {
 	@Test
 	public void testDtoBySetters() {
 		VillageDto village = new VillageDto();
-		village.setId( 101L );
+		village.setId( 101 );
 		village.setName( "Pacifica" );
 
 		assertNotNull( village );
-		assertEquals( 101L, village.getId().longValue() );
+		assertEquals( 101, village.getId().intValue() );
 		assertEquals( "Pacifica", village.getName() );
 
 		String patternString = "mb.minecraft.dto.VillageDto@\\w*\\( id=101, name=Pacifica \\)";

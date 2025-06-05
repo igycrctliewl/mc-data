@@ -20,39 +20,39 @@ public class TradeItemTest {
 	@Test
 	public void testEntityBuilder() {
 		TradeItem tradeItem = TradeItem.builder()
-				.tradeId( 1000L )
+				.tradeId( 1000 )
 				.offerRequire( REQUIRE )
 				.seqno( 1 )
 				.quantity( 1 )
-				.itemId( 1L )
+				.itemId( 1 )
 				.memo( "memo" )
 				.build();
 		assertNotNull( tradeItem );
 		assertNotNull( tradeItem.toString() );
-		assertEquals( 1000L, tradeItem.getTradeId().longValue() );
+		assertEquals( 1000, tradeItem.getTradeId().intValue() );
 		assertEquals( "R", tradeItem.getOfferRequire().getCode() );
 		assertEquals( 1, tradeItem.getSeqno().intValue() );
 		assertEquals( 1, tradeItem.getQuantity().intValue() );
-		assertEquals( 1L, tradeItem.getItemId().longValue() );
+		assertEquals( 1, tradeItem.getItemId().intValue() );
 		assertEquals( "memo", tradeItem.getMemo() );
 	}
 
 	@Test
 	public void testEntitySetters() {
 		TradeItem tradeItem = new TradeItem();
-		tradeItem.setTradeId( 1001L );
+		tradeItem.setTradeId( 1001 );
 		tradeItem.setOfferRequire( OFFER );
 		tradeItem.setSeqno( 1 );
 		tradeItem.setQuantity( 1 );
-		tradeItem.setItemId( 10L );
+		tradeItem.setItemId( 10 );
 		tradeItem.setMemo( "Punch I" );
 		assertNotNull( tradeItem );
 		assertNotNull( tradeItem.toString() );
-		assertEquals( 1001L, tradeItem.getTradeId().longValue() );
+		assertEquals( 1001, tradeItem.getTradeId().intValue() );
 		assertEquals( "O", tradeItem.getOfferRequire().getCode() );
 		assertEquals( 1, tradeItem.getSeqno().intValue() );
 		assertEquals( 1, tradeItem.getQuantity().intValue() );
-		assertEquals( 10L, tradeItem.getItemId().longValue() );
+		assertEquals( 10, tradeItem.getItemId().intValue() );
 		assertEquals( "Punch I", tradeItem.getMemo() );
 	}
 

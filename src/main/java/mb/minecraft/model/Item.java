@@ -23,7 +23,7 @@ public class Item implements Serializable {
 
 	private static final long serialVersionUID = -6539458668001366718L;
 
-	private Long id;
+	private Integer id;
 	private String name;
 	private String imageSource;
 

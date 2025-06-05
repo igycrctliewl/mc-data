@@ -9,7 +9,7 @@ import mb.minecraft.dto.VillagerDto;
  */
 public interface VillagerService {
 
-	public VillagerDto retrieveVillager( Long id );
+	public VillagerDto retrieveVillager( int id );
 	public VillagerDto retrieveVillager( String name );
 	public VillagerDto findOrCreateVillager( String name );
 	public VillagerDto createNewVillager( VillagerDto villager );

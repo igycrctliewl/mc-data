@@ -22,8 +22,8 @@ public class Trade implements Serializable {
 
 	private static final long serialVersionUID = -1936991223553152479L;
 
-	private Long id;
-	private Long villagerId;
+	private Integer id;
+	private Integer villagerId;
 	private Integer tradeSeqno;
 
 

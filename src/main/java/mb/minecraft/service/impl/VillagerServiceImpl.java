@@ -30,7 +30,7 @@ public class VillagerServiceImpl implements VillagerService {
 
 
 	@Override
-	public VillagerDto retrieveVillager( Long id ) {
+	public VillagerDto retrieveVillager( int id ) {
 		return villagerMapper.map( villagerDao.selectOneById( id ) );
 	}
 

@@ -14,7 +14,7 @@ public class Village implements Serializable {
 
    private static final long serialVersionUID = -1151545047029849390L;
 
-	private Long id;
+	private Integer id;
 	private String name;
 
 	public Village() {
@@ -24,18 +24,19 @@ public class Village implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
-		sb.append( "name=" ).append( this.getName() );
-		sb.append( " )");
+		sb.append( super.toString() ).append( "( " )
+			.append( "id=" ).append( this.getId() )
+			.append( COMMA_SEPARATOR )
+			.append( "name=" ).append( this.getName() )
+			.append( " )");
 		return sb.toString();
 	}
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId( Long id ) {
+	public void setId( Integer id ) {
 		this.id = id;
 	}
 	public String getName() {
@@ -52,9 +53,9 @@ public class Village implements Serializable {
 	}
 
 	public static class Builder {
-		private Long id;
+		private Integer id;
 		private String name;
-		public Builder id( Long id ) {
+		public Builder id( Integer id ) {
 			this.id = id;
 			return this;
 		}

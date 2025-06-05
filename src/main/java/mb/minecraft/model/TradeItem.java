@@ -22,11 +22,11 @@ public class TradeItem implements Serializable {
 
 	private static final long serialVersionUID = -421034078077683753L;
 
-	private Long tradeId;
+	private Integer tradeId;
 	private OfferRequire offerRequire;
 	private Integer seqno;
 	private Integer quantity;
-	private Long itemId;
+	private Integer itemId;
 	private String memo;
 
 

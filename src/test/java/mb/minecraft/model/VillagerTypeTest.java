@@ -15,12 +15,12 @@ public class VillagerTypeTest {
 	@Test
 	public void testEntityBuilder() {
 		VillagerType villagerType = VillagerType.builder()
-				.id( 201L )
+				.id( 201 )
 				.profession("Farmer")
 				.build();
 		assertNotNull( villagerType );
 		assertNotNull( villagerType.toString() );
-		assertEquals( 201L, villagerType.getId().longValue() );
+		assertEquals( 201, villagerType.getId().intValue() );
 		assertEquals( "Farmer", villagerType.getProfession() );
 	}
 

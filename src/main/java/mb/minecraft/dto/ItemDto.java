@@ -25,7 +25,7 @@ public class ItemDto implements Comparable<ItemDto> {
 
 	private static final Logger logger = LogManager.getLogger( ItemDto.class );
 
-	private Long id;
+	private Integer id;
 	private String name;
 	private String imageSource;
 	private Image image;
@@ -86,10 +86,10 @@ public class ItemDto implements Comparable<ItemDto> {
 	}
 
 	public static class Builder {
-		private Long id;
+		private Integer id;
 		private String name;
 		private String imageSource;
-		public Builder id( Long id ) {
+		public Builder id( Integer id ) {
 			this.id = id;
 			return this;
 		}

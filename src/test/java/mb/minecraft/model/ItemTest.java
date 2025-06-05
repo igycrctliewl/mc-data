@@ -15,13 +15,13 @@ public class ItemTest {
 	@Test
 	public void testEntityBuilder() {
 		Item item = Item.builder()
-				.id( 101L )
+				.id( 101 )
 				.name( "Emerald" )
 				.imageSource( "https://minecraft.wiki/images/Emerald_JE3_BE3.png" )
 				.build();
 		assertNotNull( item );
 		assertNotNull( item.toString() );
-		assertEquals( 101L, item.getId().longValue() );
+		assertEquals( 101, item.getId().intValue() );
 		assertEquals( "Emerald", item.getName() );
 		assertEquals( "https://minecraft.wiki/images/Emerald_JE3_BE3.png", item.getImageSource() );
 	}
@@ -29,12 +29,12 @@ public class ItemTest {
 	@Test
 	public void testEntitySetters() {
 		Item item = new Item();
-		item.setId( 101L );
+		item.setId( 101 );
 		item.setName( "Emerald" );
 		item.setImageSource( "https://minecraft.wiki/images/Emerald_JE3_BE3.png" );
 		assertNotNull( item );
 		assertNotNull( item.toString() );
-		assertEquals( 101L, item.getId().longValue() );
+		assertEquals( 101, item.getId().intValue() );
 		assertEquals( "Emerald", item.getName() );
 		assertEquals( "https://minecraft.wiki/images/Emerald_JE3_BE3.png", item.getImageSource() );
 	}

@@ -11,7 +11,7 @@ import mb.minecraft.dto.ItemDto;
  */
 public interface ItemService {
 
-	public ItemDto retrieveItem( Long id );
+	public ItemDto retrieveItem( int id );
 	public ItemDto retrieveItem( String name );
 	public ItemDto findOrCreateItem( String name );
 	public ItemDto createNewItem( ItemDto item );

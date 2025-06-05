@@ -9,7 +9,7 @@ import mb.minecraft.dto.VillagerDto;
  */
 public interface TradeService {
 
-	public TradeDto retrieveTrade( Long id );
+	public TradeDto retrieveTrade( int id );
 	public TradeDto createNewTrade( TradeDto trade );
 	public List<TradeDto> createNewTrades( List<TradeDto> trades );
 	public List<TradeDto> retrieveAllTrades();

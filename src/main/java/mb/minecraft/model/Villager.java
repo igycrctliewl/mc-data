@@ -15,10 +15,10 @@ public class Villager implements Serializable {
 
 	private static final long serialVersionUID = -3305610392007863400L;
 
-	private Long id;
+	private Integer id;
 	private String name;
-	private Long villageId;
-	private Long typeId;
+	private Integer villageId;
+	private Integer typeId;
 	/** Has this villager been assigned a NameTag in the game? */
 	private boolean tagged;
 
@@ -31,10 +31,10 @@ public class Villager implements Serializable {
 	}
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId( Long id ) {
+	public void setId( Integer id ) {
 		this.id = id;
 	}
 
@@ -70,10 +70,10 @@ public class Villager implements Serializable {
 	 * @param newType The VillagerType object describing this Villager's
 	 * profession.
 	 */
-	public void setTypeId( Long newTypeId ) {
-      this.typeId = newTypeId;
+	public void setTypeId( Integer newTypeId ) {
+		this.typeId = newTypeId;
 	}
-	public Long getTypeId() {
+	public Integer getTypeId() {
 		return this.typeId;
 	}
 
@@ -82,10 +82,10 @@ public class Villager implements Serializable {
 	 * Village.
 	 * @param newVillage The ID of the Village object where this Villager lives
 	 */
-	public void setVillageId( Long newVillageId ) {
+	public void setVillageId( Integer newVillageId ) {
 		this.villageId = newVillageId;
 	}
-	public Long getVillageId() {
+	public Integer getVillageId() {
 		return this.villageId;
 	}
 
@@ -93,13 +93,17 @@ public class Villager implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
-		sb.append( "name=" ).append( this.getName() ).append( COMMA_SEPARATOR );
-		sb.append( "isTagged=" ).append( this.isTagged() ).append( COMMA_SEPARATOR );
-		sb.append( "villageId=" ).append( this.getVillageId() ).append( COMMA_SEPARATOR );
-		sb.append( "villagerTypeId=" ).append( this.getTypeId() );
-		sb.append( " )");
+		sb.append( super.toString() ).append( "( " )
+			.append( "id=" ).append( this.getId() )
+			.append( COMMA_SEPARATOR )
+			.append( "name=" ).append( this.getName() )
+			.append( COMMA_SEPARATOR )
+			.append( "isTagged=" ).append( this.isTagged() )
+			.append( COMMA_SEPARATOR )
+			.append( "villageId=" ).append( this.getVillageId() )
+			.append( COMMA_SEPARATOR )
+			.append( "villagerTypeId=" ).append( this.getTypeId() )
+			.append( " )");
 		return sb.toString();
 	}
 
@@ -109,14 +113,14 @@ public class Villager implements Serializable {
 	}
 
 	public static class Builder {
-		private Long id;
+		private Integer id;
 		private String name;
-		private Long typeId;
-		private Long villageId;
+		private Integer typeId;
+		private Integer villageId;
 		private boolean tagged;
 
 
-		public Villager.Builder id( Long id ) {
+		public Villager.Builder id( Integer id ) {
 			this.id = id;
 			return this;
 		}
@@ -124,11 +128,11 @@ public class Villager implements Serializable {
 			this.name = name;
 			return this;
 		}
-		public Villager.Builder typeId( Long typeId ) {
+		public Villager.Builder typeId( Integer typeId ) {
 			this.typeId = typeId;
 			return this;
 		}
-		public Villager.Builder villageId( Long villageId ) {
+		public Villager.Builder villageId( Integer villageId ) {
 			this.villageId = villageId;
 			return this;
 		}

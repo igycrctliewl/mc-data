@@ -19,7 +19,7 @@ import mb.minecraft.model.VillagerType;
  * @author mikebro
  */
 public interface VillagerTypeDao extends DisposableBean {
-	public VillagerType selectOneById( Long id );
+	public VillagerType selectOneById( int id );
 	public VillagerType selectOneByName( String profession );
 	public List<VillagerType> selectAll();
 	public VillagerType insertOne( VillagerType villagerType);

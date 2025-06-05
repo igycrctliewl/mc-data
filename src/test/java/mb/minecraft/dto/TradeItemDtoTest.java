@@ -16,23 +16,23 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class TradeItemDtoTest {
 
 	private static final VillagerDto VILLAGER = VillagerDto.builder()
-			.id( 699L )
+			.id( 699 )
 			.name( "Liam Z" )
 			.build();
 
 	private static final TradeDto TRADE_1 = TradeDto.builder()
-			.id( 1L )
+			.id( 1 )
 			.villager( VILLAGER )
 			.tradeSeqno( 1 )
 			.build();
 
 	private static final ItemDto EMERALD = ItemDto.builder()
-			.id( 1001L )
+			.id( 1001 )
 			.name( "Emerald" )
 			.build();
 
 	private static final ItemDto PAPER = ItemDto.builder()
-			.id( 1009L )
+			.id( 1009 )
 			.name( "Paper" )
 			.build();
 
@@ -47,7 +47,7 @@ public class TradeItemDtoTest {
 				.build();
 		assertNotNull( tradeItem );
 		assertNotNull( tradeItem.toString() );
-		assertEquals( 1L, tradeItem.getTrade().getId().longValue() );
+		assertEquals( 1, tradeItem.getTrade().getId().intValue() );
 		assertEquals( "O", tradeItem.getOfferRequire().getCode() );
 	}
 
@@ -221,7 +221,7 @@ public class TradeItemDtoTest {
 				.build();
 		TradeItemDto other = TradeItemDto.builder()
 				.trade( TradeDto.builder()
-						.id( 1L )
+						.id( 1 )
 						.villager( VILLAGER )
 						.tradeSeqno( 2 )
 						.build() )
@@ -243,7 +243,7 @@ public class TradeItemDtoTest {
 		tradeItem.setItem( EMERALD );
 		tradeItem.setMemo( "shiny" );
 		assertNotNull( tradeItem );
-		assertEquals( 1L, tradeItem.getTrade().getId().longValue() );
+		assertEquals( 1, tradeItem.getTrade().getId().intValue() );
 		assertEquals( 1, tradeItem.getQuantity().intValue() );
 		assertEquals( "shiny", tradeItem.getMemo() );
 		assertNotNull( tradeItem.toString() );

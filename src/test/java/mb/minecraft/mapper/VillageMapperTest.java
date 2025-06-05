@@ -20,7 +20,7 @@ public class VillageMapperTest {
 		VillageDto dto = VillageMapper.map( prepareVillageEntity() );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 101L, dto.getId().longValue() );
+		assertEquals( 101, dto.getId().intValue() );
 		assertEquals( "Pacifica", dto.getName() );
 	}
 
@@ -37,7 +37,7 @@ public class VillageMapperTest {
 		Village entity = VillageMapper.map( dto );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 101L, entity.getId().longValue() );
+		assertEquals( 101, entity.getId().intValue() );
 		assertEquals( "Pacifica", entity.getName() );
 	}
 
@@ -52,14 +52,14 @@ public class VillageMapperTest {
 
 	private static Village prepareVillageEntity() {
 		return Village.builder()
-				.id( 101L )
+				.id( 101 )
 				.name( "Pacifica" )
 				.build();
 	}
 
 	private static VillageDto prepareVillageDto() {
 		return VillageDto.builder()
-				.id( 101L )
+				.id( 101 )
 				.name( "Pacifica" )
 				.build();
 	}

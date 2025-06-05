@@ -15,12 +15,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class TradeDtoTest {
 
 	private static final VillageDto VILLAGE = VillageDto.builder()
-			.id( 213L )
+			.id( 213 )
 			.name( "Calgary" )
 			.build();
 
 	private static final VillagerDto VILLAGER = VillagerDto.builder()
-			.id( 73L )
+			.id( 73 )
 			.name( "Tyler" )
 			.village( VILLAGE )
 			.build();
@@ -28,12 +28,12 @@ public class TradeDtoTest {
 	@Test
 	public void testDtoByBuilder() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
 		assertNotNull( trade );
-		assertEquals( 9L, trade.getId().longValue() );
+		assertEquals( 9, trade.getId().intValue() );
 		assertEquals( VILLAGER, trade.getVillager() );
 		assertEquals( 1, trade.getTradeSeqno().intValue() );
 	}
@@ -41,7 +41,7 @@ public class TradeDtoTest {
 	@Test
 	public void testOrderOtherNull() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
@@ -52,11 +52,11 @@ public class TradeDtoTest {
 	@Test
 	public void testThisVillagerNull() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.tradeSeqno( 1 )
 				.build();
 		TradeDto other = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
@@ -66,12 +66,12 @@ public class TradeDtoTest {
 	@Test
 	public void testOtherVillagerNull() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
 		TradeDto other = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.tradeSeqno( 1 )
 				.build();
 		assertEquals( 0, trade.compareTo( other ) );
@@ -80,11 +80,11 @@ public class TradeDtoTest {
 	@Test
 	public void testVillagerEqualThisSeqnoNull() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.build();
 		TradeDto other = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
@@ -94,12 +94,12 @@ public class TradeDtoTest {
 	@Test
 	public void testVillagerEqualOtherSeqnoNull() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
 		TradeDto other = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.build();
 		assertEquals( 0, trade.compareTo( other ) );
@@ -108,12 +108,12 @@ public class TradeDtoTest {
 	@Test
 	public void testVillagerEqualSeqnoNotEqual() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
 		TradeDto other = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 2 )
 				.build();
@@ -123,14 +123,14 @@ public class TradeDtoTest {
 	@Test
 	public void testVillagerNotEqual() {
 		TradeDto trade = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VILLAGER )
 				.tradeSeqno( 1 )
 				.build();
 		TradeDto other = TradeDto.builder()
-				.id( 9L )
+				.id( 9 )
 				.villager( VillagerDto.builder()
-						.id( 705L )
+						.id( 705 )
 						.name( "Amy" )
 						.build() )
 				.tradeSeqno( 1 )
@@ -152,11 +152,11 @@ public class TradeDtoTest {
 	@Test
 	public void testDtoBySetters() {
 		TradeDto trade= new TradeDto();
-		trade.setId( 9L );
+		trade.setId( 9 );
 		trade.setVillager( VILLAGER );
 		trade.setTradeSeqno( 1 );
 		assertNotNull( trade );
-		assertEquals( 9L, trade.getId().longValue() );
+		assertEquals( 9, trade.getId().intValue() );
 		assertEquals( VILLAGER, trade.getVillager() );
 		assertEquals( 1, trade.getTradeSeqno().intValue() );
 		assertNotNull( trade.toString() );

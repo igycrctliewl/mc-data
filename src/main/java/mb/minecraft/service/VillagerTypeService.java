@@ -9,7 +9,7 @@ import mb.minecraft.dto.VillagerTypeDto;
  */
 public interface VillagerTypeService {
 
-	public VillagerTypeDto retrieveVillagerType( Long id );
+	public VillagerTypeDto retrieveVillagerType( int id );
 	public VillagerTypeDto retrieveVillagerType( String profession );
 	public VillagerTypeDto findOrCreateVillagerType( String profession );
 	public VillagerTypeDto createNewVillagerType( VillagerTypeDto villagerType );

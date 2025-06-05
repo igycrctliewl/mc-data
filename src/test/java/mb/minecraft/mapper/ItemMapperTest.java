@@ -20,7 +20,7 @@ public class ItemMapperTest {
 		ItemDto dto = ItemMapper.map( prepareItemEntity() );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 101L, dto.getId().longValue() );
+		assertEquals( 101, dto.getId().intValue() );
 		assertEquals( "Emerald", dto.getName() );
 		assertEquals( "https://minecraft.wiki/images/Emerald_JE3_BE3.png", dto.getImageSource() );
 		assertNotNull( dto.getImage() );
@@ -39,7 +39,7 @@ public class ItemMapperTest {
 		Item entity = ItemMapper.map( dto );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 101L, entity.getId().longValue() );
+		assertEquals( 101, entity.getId().intValue() );
 		assertEquals( "Emerald", entity.getName() );
 		assertEquals( "https://minecraft.wiki/images/Emerald_JE3_BE3.png", entity.getImageSource() );
 	}
@@ -55,7 +55,7 @@ public class ItemMapperTest {
 
 	private static Item prepareItemEntity() {
 		return Item.builder()
-				.id( 101L )
+				.id( 101 )
 				.name( "Emerald" )
 				.imageSource( "https://minecraft.wiki/images/Emerald_JE3_BE3.png" )
 				.build();
@@ -63,7 +63,7 @@ public class ItemMapperTest {
 
 	private static ItemDto prepareItemDto() {
 		return ItemDto.builder()
-				.id( 101L )
+				.id( 101 )
 				.name("Emerald")
 				.imageSource( "https://minecraft.wiki/images/Emerald_JE3_BE3.png" )
 				.build();

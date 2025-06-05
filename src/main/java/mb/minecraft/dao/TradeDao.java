@@ -16,7 +16,7 @@ import mb.minecraft.model.Villager;
  */
 public interface TradeDao extends DisposableBean {
 
-	public Trade selectOneById( Long id );
+	public Trade selectOneById( int id );
 	public List<Trade> selectAll();
 
 	/**

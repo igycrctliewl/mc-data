@@ -11,7 +11,7 @@ import mb.minecraft.model.Item;
  * @author mikebro
  */
 public interface ItemDao extends DisposableBean {
-	public Item selectOneById( Long id );
+	public Item selectOneById( int id );
 	public Item selectOneByName( String name );
 	public List<Item> selectAll();
 	public Item insertOne( Item item );

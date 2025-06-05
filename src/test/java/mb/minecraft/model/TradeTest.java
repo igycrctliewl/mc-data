@@ -15,25 +15,25 @@ public class TradeTest {
 	@Test
 	public void testEntityBuilder() {
 		Trade trade = Trade.builder()
-				.id( 1000L )
-				.villagerId( 1L )
+				.id( 1000 )
+				.villagerId( 1 )
 				.tradeSeqno( 1 )
 				.build();
 		assertNotNull( trade );
-		assertEquals( 1000L, trade.getId().longValue() );
-		assertEquals( 1L, trade.getVillagerId().longValue() );
+		assertEquals( 1000, trade.getId().intValue() );
+		assertEquals( 1, trade.getVillagerId().intValue() );
 		assertEquals( 1, trade.getTradeSeqno().intValue() );
 	}
 
 	@Test
 	public void testEntitySetters() {
 		Trade trade = new Trade();
-		trade.setId( 1001L );
-		trade.setVillagerId( 1L );
+		trade.setId( 1001 );
+		trade.setVillagerId( 1 );
 		trade.setTradeSeqno( 2 );
 		assertNotNull( trade );
-		assertEquals( 1001L, trade.getId().longValue() );
-		assertEquals( 1L, trade.getVillagerId().longValue() );
+		assertEquals( 1001, trade.getId().intValue() );
+		assertEquals( 1, trade.getVillagerId().intValue() );
 		assertEquals( 2, trade.getTradeSeqno().intValue() );
 	}
 

@@ -8,7 +8,7 @@ import mb.minecraft.dto.VillageDto;
  */
 public interface VillageService {
 
-	public VillageDto retrieveVillage( Long id );
+	public VillageDto retrieveVillage( int id );
 	public VillageDto retrieveVillage( String name );
 	public VillageDto findOrCreateVillage( String name );
 	public VillageDto createNewVillage( VillageDto village );

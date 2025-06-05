@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -33,19 +34,13 @@ public class ItemServiceTest {
 	@Mock
 	ItemDao itemDao;
 
-	/*
-	 * 
-	public ItemDto saveItem( ItemDto item );
-
-	 */
-
 
 	@Test
 	public void testRetrieveItemById() {
-		when( itemDao.selectOneById( any() )).thenReturn( prepareOneItem() );
-		ItemDto item = itemService.retrieveItem( 1L );
+		when( itemDao.selectOneById( anyInt() )).thenReturn( prepareOneItem() );
+		ItemDto item = itemService.retrieveItem( 1 );
 		assertNotNull( item );
-		assertEquals( 901L, item.getId().longValue() );
+		assertEquals( 901, item.getId().intValue() );
 		assertEquals( "Redstone Dust", item.getName() );
 		assertEquals( "https://minecraft.wiki/images/Redstone_Dust_JE2_BE2.png", item.getImageSource() );
 	}
@@ -55,7 +50,7 @@ public class ItemServiceTest {
 		when( itemDao.selectOneByName( any() )).thenReturn( prepareOneItem() );
 		ItemDto item = itemService.retrieveItem( "name" );
 		assertNotNull( item );
-		assertEquals( 901L, item.getId().longValue() );
+		assertEquals( 901, item.getId().intValue() );
 		assertEquals( "Redstone Dust", item.getName() );
 		assertEquals( "https://minecraft.wiki/images/Redstone_Dust_JE2_BE2.png", item.getImageSource() );
 	}
@@ -71,14 +66,14 @@ public class ItemServiceTest {
 				.filter( v -> v.getName().equals( "Raw Beef" ) )
 				.findFirst()
 				.get();
-		assertEquals( 991L, v1.getId().longValue() );
+		assertEquals( 991, v1.getId().intValue() );
 		assertEquals( "Raw Beef", v1.getName() );
 
 		ItemDto v2 = items.stream()
 				.filter( v -> v.getName().equals( "Bottle o' Enchanting" ) )
 				.findFirst()
 				.get();
-		assertEquals( 993L, v2.getId().longValue() );
+		assertEquals( 993, v2.getId().intValue() );
 		assertEquals( "Bottle o' Enchanting", v2.getName() );
 	}
 
@@ -87,7 +82,7 @@ public class ItemServiceTest {
 		when( itemDao.selectOneByName( any() )).thenReturn( prepareOneItem() );
 		ItemDto item = itemService.findOrCreateItem( "name" );
 		assertNotNull( item );
-		assertEquals( 901L, item.getId().longValue() );
+		assertEquals( 901, item.getId().intValue() );
 		assertEquals( "Redstone Dust", item.getName() );
 	}
 
@@ -96,12 +91,12 @@ public class ItemServiceTest {
 		when( itemDao.selectOneByName( any() )).thenReturn( null );
 		when( itemDao.insertOne( any( Item.class ) )).thenAnswer( i -> {
 			Item item = i.getArgument(0);
-			item.setId( 905L );
+			item.setId( 905 );
 			return item;
 		});
 		ItemDto newItem = itemService.findOrCreateItem( "Emerald" );
 		assertNotNull( newItem );
-		assertEquals( 905L, newItem.getId().longValue() );
+		assertEquals( 905, newItem.getId().intValue() );
 		assertEquals( "Emerald", newItem.getName() );
 	}
 
@@ -109,7 +104,7 @@ public class ItemServiceTest {
 	public void testCreateNewItem() {
 		when( itemDao.insertOne( any( Item.class ) )).thenAnswer( i -> {
 			Item item = i.getArgument(0);
-			item.setId( 987L );
+			item.setId( 987 );
 			return item;
 		});
 		ItemDto newItem = ItemDto.builder()
@@ -118,7 +113,7 @@ public class ItemServiceTest {
 				.build();
 		ItemDto item = itemService.createNewItem( newItem );
 		assertNotNull( item );
-		assertEquals( 987L, item.getId().longValue() );
+		assertEquals( 987, item.getId().intValue() );
 		assertEquals( "Block of Emerald", item.getName() );
 		assertEquals( "https://minecraft.wiki/images/Block_of_Emerald_JE4_BE3.png", item.getImageSource() );
 		assertNotNull( item.getImage() );
@@ -148,7 +143,7 @@ public class ItemServiceTest {
 	public void testSaveUpdateItem() {
 		when( itemDao.insertOne( any( Item.class ) )).thenAnswer( i -> {
 			Item item = i.getArgument(0);
-			item.setId( 1001L );
+			item.setId( 1001 );
 			return item;
 		});
 		when( itemDao.update( any( Item.class ) ) ).thenAnswer( i -> i.getArgument(0) );
@@ -170,19 +165,19 @@ public class ItemServiceTest {
 
 
 	private static Item prepareOneItem() {
-		Item i = buildItem( 901L, "Redstone Dust", "https://minecraft.wiki/images/Redstone_Dust_JE2_BE2.png" );
+		Item i = buildItem( 901, "Redstone Dust", "https://minecraft.wiki/images/Redstone_Dust_JE2_BE2.png" );
 		return i;
 	}
 
 	private static List<Item> prepareItemList() {
 		List<Item> list = Arrays.asList(
-				buildItem( 991L, "Raw Beef", null ),
-				buildItem( 992L, "Gold Ingot", null ),
-				buildItem( 993L, "Bottle o' Enchanting", null ) );
+				buildItem( 991, "Raw Beef", null ),
+				buildItem( 992, "Gold Ingot", null ),
+				buildItem( 993, "Bottle o' Enchanting", null ) );
 		return list;
 	}
 
-	private static Item buildItem( Long id, String name, String imageSource ) {
+	private static Item buildItem( int id, String name, String imageSource ) {
 		return Item.builder()
 				.id( id )
 				.name( name )

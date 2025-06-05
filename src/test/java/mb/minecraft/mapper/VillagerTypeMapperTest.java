@@ -20,7 +20,7 @@ public class VillagerTypeMapperTest {
 		VillagerTypeDto dto = VillagerTypeMapper.map( prepareVillagerTypeEntity() );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 101L, dto.getId().longValue() );
+		assertEquals( 101, dto.getId().intValue() );
 		assertEquals( "Farmer", dto.getProfession() );
 	}
 
@@ -37,7 +37,7 @@ public class VillagerTypeMapperTest {
 		VillagerType entity = VillagerTypeMapper.map( dto );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 101L, entity.getId().longValue() );
+		assertEquals( 101, entity.getId().intValue() );
 		assertEquals( "Farmer", entity.getProfession() );
 	}
 
@@ -52,14 +52,14 @@ public class VillagerTypeMapperTest {
 
 	private static VillagerType prepareVillagerTypeEntity() {
 		return VillagerType.builder()
-				.id( 101L )
+				.id( 101 )
 				.profession( "Farmer" )
 				.build();
 	}
 
 	private static VillagerTypeDto prepareVillagerTypeDto() {
 		return VillagerTypeDto.builder()
-				.id( 101L )
+				.id( 101 )
 				.profession( "Farmer" )
 				.build();
 	}

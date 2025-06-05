@@ -17,32 +17,32 @@ public class VillagerTest {
 	@Test
 	public void testEntityBuilder() {
 		Villager villager = Villager.builder()
-				.id( 101L )
+				.id( 101 )
 				.name("Gary")
-				.villageId( 1L )
-				.typeId( 2L )
+				.villageId( 1 )
+				.typeId( 2 )
 				.build();
 		assertNotNull( villager );
-		assertEquals( 101L, villager.getId().longValue() );
+		assertEquals( 101, villager.getId().intValue() );
 		assertEquals( "Gary", villager.getName() );
-		assertEquals( 1L, villager.getVillageId().longValue() );
-		assertEquals( 2L, villager.getTypeId().longValue() );
+		assertEquals( 1, villager.getVillageId().intValue() );
+		assertEquals( 2, villager.getTypeId().intValue() );
 		assertFalse( villager.isTagged() );
 	}
 
 	@Test
 	public void testEntitySetters() {
 		Villager villager = new Villager();
-		villager.setId( 101L );
+		villager.setId( 101 );
 		villager.setName("Gary");
 		villager.setTagged( true );
-		villager.setVillageId( 1L );
-		villager.setTypeId( 2L );
+		villager.setVillageId( 1 );
+		villager.setTypeId( 2 );
 		assertNotNull( villager );
-		assertEquals( 101L, villager.getId().longValue() );
+		assertEquals( 101, villager.getId().intValue() );
 		assertEquals( "Gary", villager.getName() );
-		assertEquals( 1L, villager.getVillageId().longValue() );
-		assertEquals( 2L, villager.getTypeId().longValue() );
+		assertEquals( 1, villager.getVillageId().intValue() );
+		assertEquals( 2, villager.getTypeId().intValue() );
 		assertTrue( villager.isTagged() );
 	}
 

@@ -19,7 +19,7 @@ public class VillagerType implements Serializable {
 
 	private static final long serialVersionUID = 3987029880867258483L;
 
-	private Long id;
+	private Integer id;
 	private String profession;
 
 	VillagerType() {
@@ -29,14 +29,15 @@ public class VillagerType implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append( super.toString() ).append( "( " );
-		sb.append( "id=" ).append( this.getId() ).append( COMMA_SEPARATOR );
-		sb.append( "profession=" ).append( this.getProfession() );
-		sb.append( " )");
+		sb.append( super.toString() ).append( "( " )
+			.append( "id=" ).append( this.getId() )
+			.append( COMMA_SEPARATOR )
+			.append( "profession=" ).append( this.getProfession() )
+			.append( " )");
 		return sb.toString();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -45,7 +46,7 @@ public class VillagerType implements Serializable {
 	}
 
 	// Setters are private because VillagerType is an immutable object
-	private void setId( Long id ) {
+	private void setId( Integer id ) {
 		this.id = id;
 	}
 
@@ -60,10 +61,10 @@ public class VillagerType implements Serializable {
 	}
 
 	public static class Builder {
-		private Long id;
+		private Integer id;
 		private String profession;
 
-		public Builder id( Long id ) {
+		public Builder id( Integer id ) {
 			this.id = id;
 			return this;
 		}

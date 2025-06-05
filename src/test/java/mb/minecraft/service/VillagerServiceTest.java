@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 
@@ -46,10 +47,10 @@ public class VillagerServiceTest {
 
 	@Test
 	public void testRetrieveVillagerById() {
-		when( villagerDao.selectOneById( any() )).thenReturn( prepareOneVillager() );
-		VillagerDto villager = villagerService.retrieveVillager( 1L );
+		when( villagerDao.selectOneById( anyInt() )).thenReturn( prepareOneVillager() );
+		VillagerDto villager = villagerService.retrieveVillager( 1 );
 		assertNotNull( villager );
-		assertEquals( 101L, villager.getId().longValue() );
+		assertEquals( 101, villager.getId().intValue() );
 		assertEquals( "MikeBro", villager.getName() );
 		assertFalse( villager.isTagged() );
 		assertNull( villager.getType() );
@@ -61,7 +62,7 @@ public class VillagerServiceTest {
 		when( villagerDao.selectOneByName( any() )).thenReturn( prepareOneVillager() );
 		VillagerDto villager = villagerService.retrieveVillager( "name" );
 		assertNotNull( villager );
-		assertEquals( 101L, villager.getId().longValue() );
+		assertEquals( 101, villager.getId().intValue() );
 		assertEquals( "MikeBro", villager.getName() );
 		assertFalse( villager.isTagged() );
 		assertNull( villager.getType() );
@@ -79,7 +80,7 @@ public class VillagerServiceTest {
 				.filter( v -> v.getName().equals( "MikeBro" ) )
 				.findFirst()
 				.get();
-		assertEquals( 101L, v1.getId().longValue() );
+		assertEquals( 101, v1.getId().intValue() );
 		assertEquals( "MikeBro", v1.getName() );
 		assertFalse( v1.isTagged() );
 		assertNull( v1.getType() );
@@ -89,7 +90,7 @@ public class VillagerServiceTest {
 				.filter( v -> v.getName().equals( "Liam Z" ) )
 				.findFirst()
 				.get();
-		assertEquals( 103L, v2.getId().longValue() );
+		assertEquals( 103, v2.getId().intValue() );
 		assertEquals( "Liam Z", v2.getName() );
 		assertTrue( v2.isTagged() );
 		assertNull( v2.getType() );
@@ -101,7 +102,7 @@ public class VillagerServiceTest {
 		when( villagerDao.selectOneByName( any() )).thenReturn( prepareOneVillager() );
 		VillagerDto villager = villagerService.findOrCreateVillager( "name" );
 		assertNotNull( villager );
-		assertEquals( 101L, villager.getId().longValue() );
+		assertEquals( 101, villager.getId().intValue() );
 		assertEquals( "MikeBro", villager.getName() );
 		assertFalse( villager.isTagged() );
 		assertNull( villager.getType() );
@@ -115,12 +116,12 @@ public class VillagerServiceTest {
 		when( villagerMapper.map( any( VillagerDto.class ) ) ).thenAnswer( i -> mapVillagerDto( i.getArgument(0) ) );
 		when( villagerDao.insertOne( any( Villager.class ) )).thenAnswer( i -> {
 			Villager v = i.getArgument(0);
-			v.setId( 555L );
+			v.setId( 555 );
 			return v;
 		});
 		VillagerDto newVillager = villagerService.findOrCreateVillager( "Sparky" );
 		assertNotNull( newVillager );
-		assertEquals( 555L, newVillager.getId().longValue() );
+		assertEquals( 555, newVillager.getId().intValue() );
 		assertEquals( "Sparky", newVillager.getName() );
 	}
 
@@ -128,7 +129,7 @@ public class VillagerServiceTest {
 	public void testCreateNewVillager() {
 		when( villagerDao.insertOne( any( Villager.class ) )).thenAnswer( i -> {
 			Villager v = i.getArgument(0);
-			v.setId( 212L );
+			v.setId( 212 );
 			return v;
 		});
 		when( villagerMapper.map( any( VillagerDto.class ) ) ).thenAnswer( i -> mapVillagerDto( i.getArgument(0) ) );
@@ -138,7 +139,7 @@ public class VillagerServiceTest {
 				.build();
 		VillagerDto villager = villagerService.createNewVillager( newVillager );
 		assertNotNull( villager );
-		assertEquals( 212L, villager.getId().longValue() );
+		assertEquals( 212, villager.getId().intValue() );
 		assertEquals( "Shelia", villager.getName() );
 		assertTrue( villager.isTagged() );
 		assertNull( villager.getType() );
@@ -172,34 +173,34 @@ public class VillagerServiceTest {
 		when( villagerDao.update( any( Villager.class ) )).thenAnswer( i -> i.getArgument(0) );
 		when( villagerMapper.map( any( VillagerDto.class ) ) ).thenAnswer( i -> mapVillagerDto( i.getArgument(0) ) );
 		VillagerDto updateVillager = VillagerDto.builder()
-				.id( 1L )
+				.id( 1 )
 				.name( "MikeBro" )
 				.build();
 		VillagerDto updatedVillager = villagerService.saveVillager( updateVillager );
 		assertFalse( updateVillager == updatedVillager );
-		assertEquals( 1L, updatedVillager.getId().longValue() );
+		assertEquals( 1, updatedVillager.getId().intValue() );
 		assertEquals( "MikeBro", updatedVillager.getName() );
 	}
 
 
 
 	private static Villager prepareOneVillager() {
-		Villager v = buildVillager( 101L, "MikeBro" );
+		Villager v = buildVillager( 101, "MikeBro" );
 		return v;
 	}
 	
 	private static List<Villager> prepareVillagerList() {
 		List<Villager> v = new ArrayList<>();
-		v.add( buildVillager( 101L, "MikeBro" ) );
-		v.add( buildVillager( 102L, "Steve" ) );
+		v.add( buildVillager( 101, "MikeBro" ) );
+		v.add( buildVillager( 102, "Steve" ) );
 
-		Villager v3 = buildVillager( 103L, "Liam Z" );
+		Villager v3 = buildVillager( 103, "Liam Z" );
 		v3.setTagged( true );
 		v.add( v3 );
 		return v;
 	}
 
-	private static Villager buildVillager( Long id, String name ) {
+	private static Villager buildVillager( int id, String name ) {
 		return Villager.builder()
 				.id( id )
 				.name( name )

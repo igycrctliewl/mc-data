@@ -11,7 +11,7 @@ import mb.minecraft.model.Village;
  * @author mikebro
  */
 public interface VillageDao extends DisposableBean {
-	public Village selectOneById( Long id );
+	public Village selectOneById( int id );
 	public Village selectOneByName( String name );
 	public List<Village> selectAll();
 	public Village insertOne( Village village );

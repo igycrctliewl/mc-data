@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -40,26 +41,26 @@ public class VillagerTypeServiceTest {
 		assertEquals( 3, vTypes.size() );
 
 		VillagerTypeDto v1 = vTypes.stream()
-				.filter( v -> v.getId().equals( 11L ) )
+				.filter( v -> v.getId().equals( 11 ) )
 				.findFirst()
 				.get();
-		assertEquals( 11L, v1.getId().longValue() );
+		assertEquals( 11, v1.getId().intValue() );
 		assertEquals( "Cleric", v1.getProfession() );
 
 		VillagerTypeDto v2 = vTypes.stream()
-				.filter( v -> v.getId().equals( 13L ) )
+				.filter( v -> v.getId().equals( 13 ) )
 				.findFirst()
 				.get();
-		assertEquals( 13L, v2.getId().longValue() );
+		assertEquals( 13, v2.getId().intValue() );
 		assertEquals( "Blacksmith", v2.getProfession() );
 	}
 
 	@Test
 	public void testRetrieveVillagerTypeById() {
-		when( villagerTypeDao.selectOneById( any() )).thenReturn( prepareOneVillagerType() );
-		VillagerTypeDto type = villagerTypeService.retrieveVillagerType( 1L );
+		when( villagerTypeDao.selectOneById( anyInt() )).thenReturn( prepareOneVillagerType() );
+		VillagerTypeDto type = villagerTypeService.retrieveVillagerType( 1 );
 		assertNotNull( type );
-		assertEquals( 1L, type.getId().longValue() );
+		assertEquals( 1, type.getId().intValue() );
 		assertEquals( "Leatherworker", type.getProfession() );
 	}
 
@@ -68,7 +69,7 @@ public class VillagerTypeServiceTest {
 		when( villagerTypeDao.selectOneByName( any() )).thenReturn( prepareOneVillagerType() );
 		VillagerTypeDto type = villagerTypeService.retrieveVillagerType( "name" );
 		assertNotNull( type );
-		assertEquals( 1L, type.getId().longValue() );
+		assertEquals( 1, type.getId().intValue() );
 		assertEquals( "Leatherworker", type.getProfession() );
 	}
 
@@ -77,7 +78,7 @@ public class VillagerTypeServiceTest {
 		when( villagerTypeDao.selectOneByName( any() )).thenReturn( prepareOneVillagerType() );
 		VillagerTypeDto type = villagerTypeService.findOrCreateVillagerType( "name" );
 		assertNotNull( type );
-		assertEquals( 1L, type.getId().longValue() );
+		assertEquals( 1, type.getId().intValue() );
 		assertEquals( "Leatherworker", type.getProfession() );
 	}
 
@@ -87,13 +88,13 @@ public class VillagerTypeServiceTest {
 		when( villagerTypeDao.insertOne( any( VillagerType.class ) )).thenAnswer( i -> {
 			VillagerType v = i.getArgument(0);
 			return VillagerType.builder()
-					.id( 55L )
+					.id( 55 )
 					.profession( v.getProfession() )
 					.build();
 		});
 		VillagerTypeDto newType = villagerTypeService.findOrCreateVillagerType( "Shepherd" );
 		assertNotNull( newType );
-		assertEquals( 55L, newType.getId().longValue() );
+		assertEquals( 55, newType.getId().intValue() );
 		assertEquals( "Shepherd", newType.getProfession() );
 	}
 
@@ -102,7 +103,7 @@ public class VillagerTypeServiceTest {
 		when( villagerTypeDao.insertOne( any( VillagerType.class ) )).thenAnswer( i -> {
 			VillagerType v = i.getArgument(0);
 			return VillagerType.builder()
-					.id( 22L )
+					.id( 22 )
 					.profession( v.getProfession() )
 					.build();
 		});
@@ -111,7 +112,7 @@ public class VillagerTypeServiceTest {
 				.build();
 		VillagerTypeDto newType = villagerTypeService.createNewVillagerType( newVillagerType );
 		assertNotNull( newType );
-		assertEquals( 22L, newType.getId().longValue() );
+		assertEquals( 22, newType.getId().intValue() );
 		assertEquals( "Cartographer", newType.getProfession() );
 	}
 
@@ -137,19 +138,19 @@ public class VillagerTypeServiceTest {
 
 
 	private static VillagerType prepareOneVillagerType() {
-		VillagerType type = buildVillagerType( 1L, "Leatherworker" );
+		VillagerType type = buildVillagerType( 1, "Leatherworker" );
 		return type;
 	}
 
 	private static List<VillagerType> prepareVillagerTypeList() {
 		List<VillagerType> types = Arrays.asList(
-				buildVillagerType( 11L, "Cleric" ),
-				buildVillagerType( 12L, "Farmer" ),
-				buildVillagerType( 13L, "Blacksmith" ) );
+				buildVillagerType( 11, "Cleric" ),
+				buildVillagerType( 12, "Farmer" ),
+				buildVillagerType( 13, "Blacksmith" ) );
 		return types;
 	}
 
-	private static VillagerType buildVillagerType( Long id, String profession ) {
+	private static VillagerType buildVillagerType( int id, String profession ) {
 		return VillagerType.builder()
 				.id( id )
 				.profession( profession )

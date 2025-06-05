@@ -19,12 +19,12 @@ public class VillagerTypeDtoTest {
 	@Test
 	public void testDtoByBuilder() {
 		VillagerTypeDto type = VillagerTypeDto.builder()
-				.id( 301L )
+				.id( 301 )
 				.profession( "Cleric" )
 				.build();
 		assertNotNull( type );
 		assertNotNull( type.toString() );
-		assertEquals( 301L, type.getId().longValue() );
+		assertEquals( 301, type.getId().intValue() );
 		assertEquals( "Cleric", type.getProfession() );
 
 		String patternString = "mb.minecraft.dto.VillagerTypeDto@\\w*\\( id=301, profession=Cleric \\)";

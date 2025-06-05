@@ -66,21 +66,21 @@ public class TradeItemServiceTest {
 		assertEquals( 7, tradeItems.size() );
 
 		TradeItemDto ti1 = tradeItems.stream()
-				.filter( i -> i.getTrade().getId().equals( 2L ) && i.getOfferRequire().equals( OFFER ) )
+				.filter( i -> i.getTrade().getId().equals( 2 ) && i.getOfferRequire().equals( OFFER ) )
 				.findFirst()
 				.get();
 		assertEquals( 1, ti1.getSeqno().intValue() );
 		assertEquals( 1, ti1.getQuantity().intValue() );
-		assertEquals( 1010L, ti1.getItem().getId().longValue() );
+		assertEquals( 1010, ti1.getItem().getId().intValue() );
 		assertEquals( "Punch I", ti1.getMemo() );
 
 		TradeItemDto ti2 = tradeItems.stream()
-				.filter( i -> i.getTrade().getId().equals( 4L ) && i.getOfferRequire().equals( REQUIRE ) )
+				.filter( i -> i.getTrade().getId().equals( 4 ) && i.getOfferRequire().equals( REQUIRE ) )
 				.findFirst()
 				.get();
 		assertEquals( 1, ti2.getSeqno().intValue() );
 		assertEquals( 11, ti2.getQuantity().intValue() );
-		assertEquals( 1001L, ti2.getItem().getId().longValue() );
+		assertEquals( 1001, ti2.getItem().getId().intValue() );
 		assertNull( ti2.getMemo() );
 	}
 
@@ -88,7 +88,7 @@ public class TradeItemServiceTest {
 	public void testRetrieveAllTradeItemsForTrade() {
 		when( tradeMapper.map( any( TradeDto.class ) ) ).thenAnswer( i -> mapTradeDto( i.getArgument(0) ) );
 		when( tradeItemDao.selectAll( any( Trade.class ) ) ).thenReturn( prepareTradeItemListForTrade( 2 ) );
-		List<TradeItemDto> tradeItems = tradeItemService.retrieveAllTradeItems( TradeDto.builder().id( 2L ).build() );
+		List<TradeItemDto> tradeItems = tradeItemService.retrieveAllTradeItems( TradeDto.builder().id( 2 ).build() );
 		assertNotNull( tradeItems );
 		assertEquals( 3, tradeItems.size() );
 
@@ -106,12 +106,12 @@ public class TradeItemServiceTest {
 	@Test
 	public void testRetrieveAllTradeItemsForItem() {
 		when( tradeItemDao.selectAll( any( Item.class ) ) ).thenReturn( prepareTradeItemListForItem( 1001 ) );
-		List<TradeItemDto> tradeItems = tradeItemService.retrieveAllTradeItems( ItemDto.builder().id( 1001L ).name( "Emerald" ).build() );
+		List<TradeItemDto> tradeItems = tradeItemService.retrieveAllTradeItems( ItemDto.builder().id( 1001 ).name( "Emerald" ).build() );
 		assertNotNull( tradeItems );
 		assertEquals( 3, tradeItems.size() );
 
 		TradeItemDto ti1 = tradeItems.stream()
-				.filter( i -> i.getTrade().getId().equals( 2L ) &&
+				.filter( i -> i.getTrade().getId().equals( 2 ) &&
 						i.getOfferRequire().equals( REQUIRE ) &&
 						i.getSeqno().equals( 2 ) )
 				.findFirst()
@@ -119,7 +119,7 @@ public class TradeItemServiceTest {
 		assertEquals( 15, ti1.getQuantity().intValue() );
 
 		TradeItemDto ti2 = tradeItems.stream()
-				.filter( i -> i.getTrade().getId().equals( 4L ) &&
+				.filter( i -> i.getTrade().getId().equals( 4 ) &&
 						i.getOfferRequire().equals( REQUIRE ) &&
 						i.getSeqno().equals( 1 ) )
 				.findFirst()
@@ -132,17 +132,17 @@ public class TradeItemServiceTest {
 		when( tradeItemDao.insertOne( any( TradeItem.class ) )).thenAnswer( i -> i.getArgument(0) );
 		when( tradeItemMapper.map( any( TradeItemDto.class ) ) ).thenAnswer( i -> mapTradeItemDto( i.getArgument(0) ) );
 		TradeItemDto newTradeItem = TradeItemDto.builder()
-				.trade( TradeDto.builder().id( 1L ).build() )
+				.trade( TradeDto.builder().id( 1 ).build() )
 				.offerRequire( REQUIRE )
 				.seqno( 2 )
 				.quantity( 1 )
-				.item( ItemDto.builder().id( 1011L ).name( "Book" ).build() )
+				.item( ItemDto.builder().id( 1011 ).name( "Book" ).build() )
 				.build();
 		TradeItemDto insertedTradeItem = tradeItemService.createNewTradeItem( newTradeItem );
 		assertNotNull( insertedTradeItem );
 		assertFalse( insertedTradeItem == newTradeItem );
-		assertEquals( 1L, insertedTradeItem.getTrade().getId().longValue() );
-		assertEquals( 1011L, insertedTradeItem.getItem().getId().longValue() );
+		assertEquals( 1, insertedTradeItem.getTrade().getId().intValue() );
+		assertEquals( 1011, insertedTradeItem.getItem().getId().intValue() );
 	}
 
 	@Test
@@ -151,25 +151,25 @@ public class TradeItemServiceTest {
 		when( tradeItemMapper.map( any( TradeItemDto.class ) ) ).thenAnswer( i -> mapTradeItemDto( i.getArgument(0) ) );
 		List<TradeItemDto> newTradeItems = Arrays.asList(
 			TradeItemDto.builder()
-				.trade( TradeDto.builder().id( 16L ).build() )
+				.trade( TradeDto.builder().id( 16 ).build() )
 				.offerRequire( OFFER )
 				.seqno( 1 )
 				.quantity( 1 )
-				.item( ItemDto.builder().id( 1001L ).name( "Emerald" ).build() )
+				.item( ItemDto.builder().id( 1001 ).name( "Emerald" ).build() )
 				.build()
 			,
 			TradeItemDto.builder()
-				.trade( TradeDto.builder().id( 16L ).build() )
+				.trade( TradeDto.builder().id( 16 ).build() )
 				.offerRequire( REQUIRE )
 				.seqno( 1 )
 				.quantity( 35 )
-				.item( ItemDto.builder().id( 1002L ).name( "Rotten Flesh" ).build() )
+				.item( ItemDto.builder().id( 1002 ).name( "Rotten Flesh" ).build() )
 				.build() );
 		List<TradeItemDto> insertedTradeItems = tradeItemService.createNewTradeItems( newTradeItems );
 		assertNotNull( insertedTradeItems );
 		assertEquals( 2, insertedTradeItems.size() );
 		assertEquals( REQUIRE, insertedTradeItems.get(1).getOfferRequire() );
-		assertEquals( 1002L, insertedTradeItems.get(1).getItem().getId().longValue() );
+		assertEquals( 1002, insertedTradeItems.get(1).getItem().getId().intValue() );
 	}
 
 	@Test
@@ -177,11 +177,11 @@ public class TradeItemServiceTest {
 		when( tradeItemDao.update( any( TradeItem.class ) )).thenAnswer( i -> i.getArgument(0) );
 		when( tradeItemMapper.map( any( TradeItemDto.class ) ) ).thenAnswer( i -> mapTradeItemDto( i.getArgument(0) ) );
 		TradeItemDto saveTradeItem = TradeItemDto.builder()
-				.trade( TradeDto.builder().id( 100L ).build() )
+				.trade( TradeDto.builder().id( 100 ).build() )
 				.build();
 		TradeItemDto savedTradeItem = tradeItemService.saveTradeItem( saveTradeItem );
 		assertFalse( savedTradeItem == saveTradeItem );
-		assertEquals( 100L, savedTradeItem.getTrade().getId().longValue() );
+		assertEquals( 100, savedTradeItem.getTrade().getId().intValue() );
 	}
 
 	@Test
@@ -189,7 +189,7 @@ public class TradeItemServiceTest {
 		when( tradeItemDao.deleteOne( any( TradeItem.class ) )).thenReturn( true );
 		when( tradeItemMapper.map( any( TradeItemDto.class ) ) ).thenAnswer( i -> mapTradeItemDto( i.getArgument(0) ) );
 		TradeItemDto deleteTradeItem = TradeItemDto.builder()
-				.trade( TradeDto.builder().id( 10L ).build() )
+				.trade( TradeDto.builder().id( 10 ).build() )
 				.build();
 		boolean tradeItemDeleted = tradeItemService.removeTradeItem( deleteTradeItem );
 		assertTrue( tradeItemDeleted );
@@ -209,21 +209,21 @@ public class TradeItemServiceTest {
 		return list;
 	}
 
-	private static List<TradeItem> prepareTradeItemListForTrade( long tradeId ) {
+	private static List<TradeItem> prepareTradeItemListForTrade( int tradeId ) {
 		List<TradeItem> list = prepareTradeItemList().stream()
 				.filter( ti -> ti.getTradeId().equals( tradeId ) )
 				.collect( Collectors.toList() );
 		return list;
 	}
 
-	private static List<TradeItem> prepareTradeItemListForItem( long itemId ) {
+	private static List<TradeItem> prepareTradeItemListForItem( int itemId ) {
 		List<TradeItem> list = prepareTradeItemList().stream()
 				.filter( ti -> ti.getItemId().equals( itemId ) )
 				.collect( Collectors.toList() );
 		return list;
 	}
 
-	private static TradeItem buildTradeItem( long tradeId, String offReq, int seqno, int quantity, long itemId, String memo ) {
+	private static TradeItem buildTradeItem( int tradeId, String offReq, int seqno, int quantity, int itemId, String memo ) {
 		return TradeItem.builder()
 				.tradeId( tradeId )
 				.offerRequire( OfferRequire.getFromCode( offReq ) )

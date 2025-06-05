@@ -15,19 +15,19 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class VillagerDtoTest {
 
 	private static final VillagerTypeDto VILLAGER_TYPE = VillagerTypeDto.builder()
-			.id( 301L )
+			.id( 301 )
 			.profession( "Cleric" )
 			.build();
 
 	private static final VillageDto VILLAGE = VillageDto.builder()
-			.id( 201L )
+			.id( 201 )
 			.name( "Deep Water Cove" )
 			.build();
 
 	@Test
 	public void testDtoByBuilder() {
 		VillagerDto villager = VillagerDto.builder()
-				.id( 101L )
+				.id( 101 )
 				.name( "Liam Z" )
 				.tagged( true )
 				.type( VILLAGER_TYPE )
@@ -35,7 +35,7 @@ public class VillagerDtoTest {
 				.build();
 		assertNotNull( villager );
 		assertNotNull( villager.toString() );
-		assertEquals( 101L, villager.getId().longValue() );
+		assertEquals( 101, villager.getId().intValue() );
 		assertEquals( "Liam Z", villager.getName() );
 		assertTrue( villager.isTagged() );
 		assertEquals( VILLAGER_TYPE, villager.getType() );
@@ -62,14 +62,14 @@ public class VillagerDtoTest {
 	@Test
 	public void testDtoBySetters() {
 		VillagerDto villager = new VillagerDto();
-		villager.setId( 101L );
+		villager.setId( 101 );
 		villager.setName( "Liam Z" );
 		villager.setTagged( true );
 		villager.setType( VILLAGER_TYPE );
 		villager.setVillage( VILLAGE );
 		assertNotNull( villager );
 		assertNotNull( villager.toString() );
-		assertEquals( 101L, villager.getId().longValue() );
+		assertEquals( 101, villager.getId().intValue() );
 		assertEquals( "Liam Z", villager.getName() );
 		assertTrue( villager.isTagged() );
 		assertEquals( VILLAGER_TYPE, villager.getType() );

@@ -26,7 +26,7 @@ public class VillageServiceImpl implements VillageService {
 
 
 	@Override
-	public VillageDto retrieveVillage( Long id ) {
+	public VillageDto retrieveVillage( int id ) {
 		return VillageMapper.map( villageDao.selectOneById( id ) );
 	}
 

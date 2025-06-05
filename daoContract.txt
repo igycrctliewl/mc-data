@@ -15,7 +15,8 @@ DAO contract for Minecraft Economy data access
 		a no-arg constructor for object create, as needed
 
 
-	Entity selectOneById( Long id )
+	Entity selectOneById( int id )
+		All ID keys are regular integers
 		lookup entity by its ID key
 		If found, return the entity
 		If not found, return null

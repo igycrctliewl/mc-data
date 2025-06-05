@@ -36,16 +36,16 @@ public class TradeItemMapperTest {
 
 	@Test
 	public void testMapEntityToDto() {
-		when( tradeService.retrieveTrade( 4L ) ).thenReturn( TRADE_O );
-		when( itemService.retrieveItem( 1012L ) ).thenReturn( ITEM_O );
+		when( tradeService.retrieveTrade( 4 ) ).thenReturn( TRADE_O );
+		when( itemService.retrieveItem( 1012 ) ).thenReturn( ITEM_O );
 		TradeItemDto dto = tradeItemMapper.map( TRADE_ITEM_E );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 4L, dto.getTrade().getId().longValue() );
+		assertEquals( 4, dto.getTrade().getId().intValue() );
 		assertEquals( OFFER, dto.getOfferRequire() );
 		assertEquals( 1, dto.getSeqno().intValue() );
 		assertEquals( 1, dto.getQuantity().intValue() );
-		assertEquals( 1012L, dto.getItem().getId().longValue() );
+		assertEquals( 1012, dto.getItem().getId().intValue() );
 		assertEquals( "brand new", dto.getMemo() );
 	}
 
@@ -81,11 +81,11 @@ public class TradeItemMapperTest {
 		TradeItem entity = tradeItemMapper.map( dto );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 4L, entity.getTradeId().longValue() );
+		assertEquals( 4, entity.getTradeId().intValue() );
 		assertEquals( OFFER, entity.getOfferRequire() );
 		assertEquals( 1, entity.getSeqno().intValue() );
 		assertEquals( 1, entity.getQuantity().intValue() );
-		assertEquals( 1012L, entity.getItemId().longValue() );
+		assertEquals( 1012, entity.getItemId().intValue() );
 		assertEquals( "used", entity.getMemo() );
 	}
 
@@ -116,12 +116,12 @@ public class TradeItemMapperTest {
 
 
 	private static final ItemDto ITEM_O = ItemDto.builder()
-			.id( 1012L )
+			.id( 1012 )
 			.name("Compass")
 			.build();
 
 	private static final TradeDto TRADE_O = TradeDto.builder()
-			.id( 4L )
+			.id( 4 )
 			.tradeSeqno( 2 )
 			.build();
 

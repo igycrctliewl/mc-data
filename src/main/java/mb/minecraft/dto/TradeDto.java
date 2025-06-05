@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TradeDto implements Comparable<TradeDto> {
 
-	private Long id;
+	private Integer id;
 	private VillagerDto villager;
 	private Integer tradeSeqno;
 

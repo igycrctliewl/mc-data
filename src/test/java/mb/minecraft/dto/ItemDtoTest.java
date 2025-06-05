@@ -20,12 +20,12 @@ public class ItemDtoTest {
 	@Test
 	public void testDtoByBuilder() {
 		ItemDto item = ItemDto.builder()
-				.id( 1001L )
+				.id( 1001 )
 				.name( "Diamond" )
 				.imageSource( "https://minecraft.wiki/images/Diamond_JE3_BE3.png" )
 				.build();
 		assertNotNull( item );
-		assertEquals( 1001L, item.getId().longValue() );
+		assertEquals( 1001, item.getId().intValue() );
 		assertEquals( "Diamond", item.getName() );
 		assertEquals( "https://minecraft.wiki/images/Diamond_JE3_BE3.png", item.getImageSource() );
 		assertNotNull( item.getImage() );
@@ -48,11 +48,11 @@ public class ItemDtoTest {
 	@Test
 	public void testDtoBySetters() {
 		ItemDto item = new ItemDto();
-		item.setId( 1001L );
+		item.setId( 1001 );
 		item.setName( "Diamond" );
 		item.setImageSource( "https://minecraft.wiki/images/Diamond_JE3_BE3.png" );
 		assertNotNull( item );
-		assertEquals( 1001L, item.getId().longValue() );
+		assertEquals( 1001, item.getId().intValue() );
 		assertEquals( "Diamond", item.getName() );
 		assertEquals( "https://minecraft.wiki/images/Diamond_JE3_BE3.png", item.getImageSource() );
 		assertNotNull( item.getImage() );
@@ -74,7 +74,7 @@ public class ItemDtoTest {
 	@Test
 	public void testDtoImageSourceFail() {
 		ItemDto item = new ItemDto();
-		item.setId( 1001L );
+		item.setId( 1001 );
 		item.setName( "Diamond" );
 		item.setImageSource( "https://minecraftwiki/images/Diamond_JE3_BE3.png" );
 		assertNull( item.getImage() );

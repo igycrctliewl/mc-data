@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -35,10 +36,10 @@ public class VillageServiceTest {
 
 	@Test
 	public void testRetrieveVillageById() {
-		when( villageDao.selectOneById( any() )).thenReturn( prepareOneVillage() );
-		VillageDto village = villageService.retrieveVillage( 1L );
+		when( villageDao.selectOneById( anyInt() )).thenReturn( prepareOneVillage() );
+		VillageDto village = villageService.retrieveVillage( 1 );
 		assertNotNull( village );
-		assertEquals( 123L, village.getId().longValue() );
+		assertEquals( 123, village.getId().intValue() );
 		assertEquals( "Pacifica", village.getName() );
 	}
 
@@ -47,7 +48,7 @@ public class VillageServiceTest {
 		when( villageDao.selectOneByName( any() )).thenReturn( prepareOneVillage() );
 		VillageDto village = villageService.retrieveVillage( "name" );
 		assertNotNull( village );
-		assertEquals( 123L, village.getId().longValue() );
+		assertEquals( 123, village.getId().intValue() );
 		assertEquals( "Pacifica", village.getName() );
 	}
 
@@ -62,14 +63,14 @@ public class VillageServiceTest {
 				.filter( v -> v.getName().equals( "Pacifica" ) )
 				.findFirst()
 				.get();
-		assertEquals( 123L, v1.getId().longValue() );
+		assertEquals( 123, v1.getId().intValue() );
 		assertEquals( "Pacifica", v1.getName() );
 
 		VillageDto v2 = villages.stream()
 				.filter( v -> v.getName().equals( "Deep Water Cove" ) )
 				.findFirst()
 				.get();
-		assertEquals( 234L, v2.getId().longValue() );
+		assertEquals( 234, v2.getId().intValue() );
 		assertEquals( "Deep Water Cove", v2.getName() );
 	}
 
@@ -78,7 +79,7 @@ public class VillageServiceTest {
 		when( villageDao.selectOneByName( any() )).thenReturn( prepareOneVillage() );
 		VillageDto village = villageService.findOrCreateVillage( "name" );
 		assertNotNull( village );
-		assertEquals( 123L, village.getId().longValue() );
+		assertEquals( 123, village.getId().intValue() );
 		assertEquals( "Pacifica", village.getName() );
 	}
 
@@ -87,13 +88,12 @@ public class VillageServiceTest {
 		when( villageDao.selectOneByName( any() )).thenReturn( null );
 		when( villageDao.insertOne( any( Village.class ) )).thenAnswer( i -> {
 			Village v = i.getArgument(0);
-			v.setId( 555L );
+			v.setId( 555 );
 			return v;
 		});
-		//when( villageDao.getNextIdSeq() ).thenReturn( 555L );
 		VillageDto village = villageService.findOrCreateVillage( "Northern Outpost" );
 		assertNotNull( village );
-		assertEquals( 555L, village.getId().longValue() );
+		assertEquals( 555, village.getId().intValue() );
 		assertEquals( "Northern Outpost", village.getName() );
 	}
 
@@ -101,7 +101,7 @@ public class VillageServiceTest {
 	public void testCreateNewVillage() {
 		when( villageDao.insertOne( any( Village.class ) )).thenAnswer( i -> {
 			Village v = i.getArgument(0);
-			v.setId( 415L );
+			v.setId( 415 );
 			return v;
 		});
 		VillageDto newVillage = VillageDto.builder()
@@ -109,7 +109,7 @@ public class VillageServiceTest {
 				.build();
 		VillageDto village = villageService.createNewVillage( newVillage );
 		assertNotNull( village );
-		assertEquals( 415L, village.getId().longValue() );
+		assertEquals( 415, village.getId().intValue() );
 		assertEquals( "San Francisco", village.getName() );
 	}
 
@@ -136,20 +136,20 @@ public class VillageServiceTest {
 
 
 	private static Village prepareOneVillage() {
-		Village v = buildVillage( 123L, "Pacifica" );
+		Village v = buildVillage( 123, "Pacifica" );
 		return v;
 	}
 	
 	private static List<Village> prepareVillageList() {
 		List<Village> v = Arrays.asList(
-				buildVillage( 12L, "Southland" ),
-				buildVillage( 123L, "Pacifica" ),
-				buildVillage( 234L, "Deep Water Cove" )
+				buildVillage( 12, "Southland" ),
+				buildVillage( 123, "Pacifica" ),
+				buildVillage( 234, "Deep Water Cove" )
 		);
 		return v;
 	}
 
-	private static Village buildVillage( Long id, String name ) {
+	private static Village buildVillage( int id, String name ) {
 		return Village.builder()
 				.id( id )
 				.name( name )

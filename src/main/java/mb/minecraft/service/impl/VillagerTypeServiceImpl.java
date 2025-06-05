@@ -26,7 +26,7 @@ public class VillagerTypeServiceImpl implements VillagerTypeService {
 
 
 	@Override
-	public VillagerTypeDto retrieveVillagerType( Long id ) {
+	public VillagerTypeDto retrieveVillagerType( int id ) {
 		return VillagerTypeMapper.map( villagerTypeDao.selectOneById( id ) );
 	}
 

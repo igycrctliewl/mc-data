@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VillagerTypeDto implements Comparable<VillagerTypeDto> {
 
-	private Long id;
+	private Integer id;
 	private String profession;
 
 
@@ -36,7 +36,7 @@ public class VillagerTypeDto implements Comparable<VillagerTypeDto> {
 
 	// Setters are private because this object should be immutable.
 	@SuppressWarnings("unused")
-	private void setId( Long id ) {
+	private void setId( int id ) {
 		this.id = id;
 	}
 	@SuppressWarnings("unused")

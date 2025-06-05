@@ -30,11 +30,11 @@ public class TradeMapperTest {
 
 	@Test
 	public void testMapEntityToDto() {
-		when( villagerService.retrieveVillager( 701L ) ).thenReturn( VILLAGER );
+		when( villagerService.retrieveVillager( 701 ) ).thenReturn( VILLAGER );
 		TradeDto dto = tradeMapper.map( TRADE_E );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 3L, dto.getId().longValue() );
+		assertEquals( 3, dto.getId().intValue() );
 		assertEquals( "Gary", dto.getVillager().getName() );
 		assertEquals( 1, dto.getTradeSeqno().intValue() );
 	}
@@ -42,13 +42,13 @@ public class TradeMapperTest {
 	@Test
 	public void testMapBasicEntityToDto() {
 		Trade trade = Trade.builder()
-				.id( 3L )
+				.id( 3 )
 				.tradeSeqno( 1 )
 				.build();
 		TradeDto dto = tradeMapper.map( trade );
 		assertNotNull( dto );
 		assertNotNull( dto.toString() );
-		assertEquals( 3L, dto.getId().longValue() );
+		assertEquals( 3, dto.getId().intValue() );
 		assertEquals( 1, dto.getTradeSeqno().intValue() );
 		assertNull( dto.getVillager() );
 	}
@@ -65,21 +65,21 @@ public class TradeMapperTest {
 		Trade entity = tradeMapper.map( TRADE_O );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 4L, entity.getId().longValue() );
-		assertEquals( 701L, entity.getVillagerId().longValue() );
-		assertEquals( 2L, entity.getTradeSeqno().longValue() );
+		assertEquals( 4, entity.getId().intValue() );
+		assertEquals( 701, entity.getVillagerId().intValue() );
+		assertEquals( 2, entity.getTradeSeqno().intValue() );
 	}
 
 	@Test
 	public void testMapBasicDtoToEntity() {
 		TradeDto dto = TradeDto.builder()
-				.id( 4L )
+				.id( 4 )
 				.tradeSeqno( 2 )
 				.build();
 		Trade entity = tradeMapper.map( dto );
 		assertNotNull( entity );
 		assertNotNull( entity.toString() );
-		assertEquals( 4L, entity.getId().longValue() );
+		assertEquals( 4, entity.getId().intValue() );
 		assertEquals( 2, entity.getTradeSeqno().intValue() );
 		assertNull( entity.getVillagerId() );
 	}
@@ -93,18 +93,18 @@ public class TradeMapperTest {
 
 
 	private static final VillagerDto VILLAGER = VillagerDto.builder()
-			.id( 701L )
+			.id( 701 )
 			.name("Gary")
 			.build();
 
 	private static final Trade TRADE_E = Trade.builder()
-			.id( 3L )
+			.id( 3 )
 			.villagerId( VILLAGER.getId() )
 			.tradeSeqno( 1 )
 			.build();
 
 	private static final TradeDto TRADE_O = TradeDto.builder()
-			.id( 4L )
+			.id( 4 )
 			.villager( VILLAGER )
 			.tradeSeqno( 2 )
 			.build();

@@ -53,12 +53,12 @@ public class TradeServiceTest {
 
 	@Test
 	public void testRetrieveTrade() {
-		when( tradeDao.selectOneById( 13L )).thenReturn( TRADE_E1 );
-		TradeDto tradeDto = tradeService.retrieveTrade( 13L );
+		when( tradeDao.selectOneById( 13 )).thenReturn( TRADE_E1 );
+		TradeDto tradeDto = tradeService.retrieveTrade( 13 );
 		assertNotNull( tradeDto );
 		assertNotNull( tradeDto.toString() );
-		assertEquals( 13L, tradeDto.getId().longValue() );
-		assertEquals( 705L, tradeDto.getVillager().getId().longValue() );
+		assertEquals( 13, tradeDto.getId().intValue() );
+		assertEquals( 705, tradeDto.getVillager().getId().intValue() );
 		assertEquals( 1, tradeDto.getTradeSeqno().intValue() );
 	}
 
@@ -69,7 +69,7 @@ public class TradeServiceTest {
 			List<Trade> ts = i.getArgument(0);
 			List<Trade> result = ts.stream()
 					.map( t -> {
-						t.setId( Integer.toUnsignedLong( idGen.incrementAndGet() ) );
+						t.setId( idGen.incrementAndGet() );
 						return t;
 					})
 					.collect( Collectors.toList() );
@@ -79,9 +79,9 @@ public class TradeServiceTest {
 		List<TradeDto> newTrades = tradeService.createNewTrades( prepareTrades() );
 		assertNotNull( newTrades );
 		assertEquals( 3, newTrades.size() );
-		assertEquals( 17L, newTrades.get(0).getId().longValue() );
-		assertEquals( 18L, newTrades.get(1).getId().longValue() );
-		assertEquals( 19L, newTrades.get(2).getId().longValue() );
+		assertEquals( 17, newTrades.get(0).getId().intValue() );
+		assertEquals( 18, newTrades.get(1).getId().intValue() );
+		assertEquals( 19, newTrades.get(2).getId().intValue() );
 	}
 
 	@Test
@@ -92,19 +92,19 @@ public class TradeServiceTest {
 		assertEquals( 3, trades.size() );
 
 		TradeDto t1 = trades.stream()
-				.filter( t -> t.getId().equals( 13L ) )
+				.filter( t -> t.getId().equals( 13 ) )
 				.findFirst()
 				.get();
-		assertEquals( 13L, t1.getId().longValue() );
-		assertEquals( 705L, t1.getVillager().getId().longValue() );
+		assertEquals( 13, t1.getId().intValue() );
+		assertEquals( 705, t1.getVillager().getId().intValue() );
 		assertEquals( 1, t1.getTradeSeqno().intValue() );
 
 		TradeDto t2 = trades.stream()
-				.filter( t -> t.getId().equals( 15L ) )
+				.filter( t -> t.getId().equals( 15 ) )
 				.findFirst()
 				.get();
-		assertEquals( 15L, t2.getId().longValue() );
-		assertEquals( 705L, t2.getVillager().getId().longValue() );
+		assertEquals( 15, t2.getId().intValue() );
+		assertEquals( 705, t2.getVillager().getId().intValue() );
 		assertEquals( 3, t2.getTradeSeqno().intValue() );
 	}
 
@@ -112,25 +112,25 @@ public class TradeServiceTest {
 	public void testRetrieveAllVillagerTrades() {
 		when( tradeDao.selectAll( any( Villager.class) ) ).thenReturn( prepareAllTrades() );
 		when( villagerMapper.map( any( VillagerDto.class ) ) ).thenAnswer( i -> mapVillagerDto( i.getArgument(0) ) );
-		VillagerDto villager = VillagerDto.builder().id( 705L ).build();
+		VillagerDto villager = VillagerDto.builder().id( 705 ).build();
 		List<TradeDto> trades = tradeService.retrieveAllTrades( villager );
 		assertNotNull( trades );
 		assertEquals( 3, trades.size() );
 
 		TradeDto t1 = trades.stream()
-				.filter( t -> t.getId().equals( 13L ) )
+				.filter( t -> t.getId().equals( 13 ) )
 				.findFirst()
 				.get();
-		assertEquals( 13L, t1.getId().longValue() );
-		assertEquals( 705L, t1.getVillager().getId().longValue() );
+		assertEquals( 13, t1.getId().intValue() );
+		assertEquals( 705, t1.getVillager().getId().intValue() );
 		assertEquals( 1, t1.getTradeSeqno().intValue() );
 
 		TradeDto t2 = trades.stream()
-				.filter( t -> t.getId().equals( 15L ) )
+				.filter( t -> t.getId().equals( 15 ) )
 				.findFirst()
 				.get();
-		assertEquals( 15L, t2.getId().longValue() );
-		assertEquals( 705L, t2.getVillager().getId().longValue() );
+		assertEquals( 15, t2.getId().intValue() );
+		assertEquals( 705, t2.getVillager().getId().intValue() );
 		assertEquals( 3, t2.getTradeSeqno().intValue() );
 	}
 
@@ -139,8 +139,8 @@ public class TradeServiceTest {
 		when( tradeDao.update( any( Trade.class) ) ).thenAnswer( i -> i.getArgument(0) );
 		when( tradeMapper.map( any( TradeDto.class ) ) ).thenAnswer( i -> mapTradeDto( i.getArgument(0) ) );
 		TradeDto updateTrade = TradeDto.builder()
-				.id( 15L )
-				.villager( VillagerDto.builder().id( 705L ).build() )
+				.id( 15 )
+				.villager( VillagerDto.builder().id( 705 ).build() )
 				.tradeSeqno( 4 )
 				.build();
 		TradeDto updatedTrade = tradeService.saveTrade( updateTrade );
@@ -153,8 +153,8 @@ public class TradeServiceTest {
 		when( tradeDao.deleteOne( any( Trade.class ) )).thenReturn( true );
 		when( tradeMapper.map( any( TradeDto.class ) ) ).thenAnswer( i -> mapTradeDto( i.getArgument(0) ) );
 		TradeDto deleteTrade = TradeDto.builder()
-				.id( 15L )
-				.villager( VillagerDto.builder().id( 705L ).build() )
+				.id( 15 )
+				.villager( VillagerDto.builder().id( 705 ).build() )
 				.tradeSeqno( 3 )
 				.build();
 		boolean tradeDeleted = tradeService.removeTrade( deleteTrade );
@@ -164,8 +164,8 @@ public class TradeServiceTest {
 
 
 	private static final Trade TRADE_E1 = Trade.builder()
-			.id( 13L )
-			.villagerId( 705L )
+			.id( 13 )
+			.villagerId( 705 )
 			.tradeSeqno( 1 )
 			.build();
 
@@ -173,13 +173,13 @@ public class TradeServiceTest {
 		List<Trade> trades = new ArrayList<>();
 		trades.add( TRADE_E1 );
 		trades.add( Trade.builder()
-				.id( 14L )
-				.villagerId( 705L )
+				.id( 14 )
+				.villagerId( 705 )
 				.tradeSeqno( 2 )
 				.build() );
 		trades.add( Trade.builder()
-				.id( 15L )
-				.villagerId( 705L )
+				.id( 15 )
+				.villagerId( 705 )
 				.tradeSeqno( 3 )
 				.build() );
 		return trades;
@@ -188,15 +188,15 @@ public class TradeServiceTest {
 	private static List<TradeDto> prepareTrades() {
 		List<TradeDto> trades = new ArrayList<>();
 		trades.add( TradeDto.builder()
-				.villager( VillagerDto.builder().id( 706L ).build() )
+				.villager( VillagerDto.builder().id( 706 ).build() )
 				.tradeSeqno( 1 )
 				.build() );
 		trades.add( TradeDto.builder()
-				.villager( VillagerDto.builder().id( 706L ).build() )
+				.villager( VillagerDto.builder().id( 706 ).build() )
 				.tradeSeqno( 2 )
 				.build() );
 		trades.add( TradeDto.builder()
-				.villager( VillagerDto.builder().id( 706L ).build() )
+				.villager( VillagerDto.builder().id( 706 ).build() )
 				.tradeSeqno( 3 )
 				.build() );
 		return trades;

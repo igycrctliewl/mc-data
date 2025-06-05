@@ -28,7 +28,7 @@ public class ItemServiceImpl implements ItemService {
 
 
 	@Override
-	public ItemDto retrieveItem( Long id ) {
+	public ItemDto retrieveItem( int id ) {
 		ItemDto dto = ItemMapper.map( itemDao.selectOneById( id ) );
 		return dto;
 	}
