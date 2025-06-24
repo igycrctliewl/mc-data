@@ -21,8 +21,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import mb.minecraft.dao.VillagerDao;
+import mb.minecraft.dto.VillageDto;
 import mb.minecraft.dto.VillagerDto;
 import mb.minecraft.mapper.VillagerMapper;
+import mb.minecraft.model.Village;
 import mb.minecraft.model.Villager;
 import mb.minecraft.service.impl.VillagerServiceImpl;
 
@@ -73,6 +75,38 @@ public class VillagerServiceTest {
 	public void testRetrieveAllVillagers() {
 		when( villagerDao.selectAll() ).thenReturn( prepareVillagerList() );
 		List<VillagerDto> villagers = villagerService.retrieveAllVillagers();
+		assertNotNull( villagers );
+		assertEquals( 3, villagers.size() );
+
+		VillagerDto v1 = villagers.stream()
+				.filter( v -> v.getName().equals( "MikeBro" ) )
+				.findFirst()
+				.get();
+		assertEquals( 101, v1.getId().intValue() );
+		assertEquals( "MikeBro", v1.getName() );
+		assertFalse( v1.isTagged() );
+		assertNull( v1.getType() );
+		assertNull( v1.getVillage() );
+
+		VillagerDto v2 = villagers.stream()
+				.filter( v -> v.getName().equals( "Liam Z" ) )
+				.findFirst()
+				.get();
+		assertEquals( 103, v2.getId().intValue() );
+		assertEquals( "Liam Z", v2.getName() );
+		assertTrue( v2.isTagged() );
+		assertNull( v2.getType() );
+		assertNull( v2.getVillage() );
+	}
+
+	@Test
+	public void testRetrieveAllVillagersForVillage() {
+		VillageDto village = VillageDto.builder()
+				.id( 1 )
+				.name( "The Village" )
+				.build();
+		when( villagerDao.selectAll( any( Village.class ) ) ).thenReturn( prepareVillagerList() );
+		List<VillagerDto> villagers = villagerService.retrieveAllVillagers( village );
 		assertNotNull( villagers );
 		assertEquals( 3, villagers.size() );
 

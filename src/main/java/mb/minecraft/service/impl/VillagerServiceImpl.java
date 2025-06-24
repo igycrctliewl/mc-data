@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mb.minecraft.dao.VillagerDao;
+import mb.minecraft.dto.VillageDto;
 import mb.minecraft.dto.VillagerDto;
+import mb.minecraft.mapper.VillageMapper;
 import mb.minecraft.mapper.VillagerMapper;
 import mb.minecraft.model.Villager;
 import mb.minecraft.service.VillagerService;
@@ -60,6 +62,15 @@ public class VillagerServiceImpl implements VillagerService {
 	@Override
 	public List<VillagerDto> retrieveAllVillagers() {
 		List<Villager> villagers = villagerDao.selectAll();
+		List<VillagerDto> dtoList = villagers.stream()
+				.map( v -> villagerMapper.map( v ) )
+				.collect( Collectors.toList() );
+		return dtoList;
+	}
+
+	@Override
+	public List<VillagerDto> retrieveAllVillagers( VillageDto village ) {
+		List<Villager> villagers = villagerDao.selectAll( VillageMapper.map( village ) );
 		List<VillagerDto> dtoList = villagers.stream()
 				.map( v -> villagerMapper.map( v ) )
 				.collect( Collectors.toList() );

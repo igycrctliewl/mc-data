@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
 
+import mb.minecraft.model.Village;
 import mb.minecraft.model.Villager;
 
 /**
@@ -14,6 +15,7 @@ public interface VillagerDao extends DisposableBean {
 	public Villager selectOneById( int id );
 	public Villager selectOneByName( String name );
 	public List<Villager> selectAll();
+	public List<Villager> selectAll( Village village );
 	public Villager insertOne( Villager villager );
 	public Villager update( Villager villager );
 	public boolean deleteOne( Villager villager );
